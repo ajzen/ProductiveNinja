@@ -9,14 +9,10 @@ import android.view.ViewGroup;
 
 import com.example.karanbatra.materialdesign.R;
 
+public class NotesFragment extends Fragment {
+    public NotesFragment(){
 
-public class HomeFragment extends Fragment {
-
-    public HomeFragment() {
-        // Required empty public constructor
     }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -25,7 +21,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_notes, container, false);
 
 
         // Inflate the layout for this fragment
