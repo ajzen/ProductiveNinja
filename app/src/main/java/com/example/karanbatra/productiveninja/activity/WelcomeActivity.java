@@ -1,4 +1,4 @@
-package com.example.karanbatra.materialdesign.activity;
+package com.example.karanbatra.productiveninja.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.karanbatra.materialdesign.R;
+import com.example.karanbatra.productiveninja.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 

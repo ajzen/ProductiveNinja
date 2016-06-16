@@ -1,4 +1,4 @@
-package com.example.karanbatra.materialdesign.activity;
+package com.example.karanbatra.productiveninja.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;

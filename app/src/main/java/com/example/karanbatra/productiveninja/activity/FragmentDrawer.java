@@ -1,4 +1,4 @@
-package com.example.karanbatra.materialdesign.activity;
+package com.example.karanbatra.productiveninja.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.karanbatra.materialdesign.R;
-import com.example.karanbatra.materialdesign.adapter.NavigationDrawerAdapter;
-import com.example.karanbatra.materialdesign.model.NavDrawerItem;
+import com.example.karanbatra.productiveninja.R;
+import com.example.karanbatra.productiveninja.adapter.NavigationDrawerAdapter;
+import com.example.karanbatra.productiveninja.model.NavDrawerItem;
 
 import java.util.ArrayList;
 import java.util.List;

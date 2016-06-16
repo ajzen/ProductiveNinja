@@ -1,4 +1,4 @@
-package com.example.karanbatra.materialdesign;
+package com.example.karanbatra.productiveninja;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,4 +1,4 @@
-package com.example.karanbatra.materialdesign.activity;
+package com.example.karanbatra.productiveninja.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.karanbatra.materialdesign.R;
+import com.example.karanbatra.productiveninja.R;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 

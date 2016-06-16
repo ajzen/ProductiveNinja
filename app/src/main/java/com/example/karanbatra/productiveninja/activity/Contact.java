@@ -1,4 +1,4 @@
-package com.example.karanbatra.materialdesign.activity;
+package com.example.karanbatra.productiveninja.activity;
 
 /**
  * Created by neeraj.varshney on 6/3/2016.

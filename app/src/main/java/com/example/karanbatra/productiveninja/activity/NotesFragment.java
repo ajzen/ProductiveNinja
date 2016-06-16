@@ -1,4 +1,4 @@
-package com.example.karanbatra.materialdesign.activity;
+package com.example.karanbatra.productiveninja.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.karanbatra.materialdesign.R;
+import com.example.karanbatra.productiveninja.R;
 
 public class NotesFragment extends Fragment {
     public NotesFragment(){

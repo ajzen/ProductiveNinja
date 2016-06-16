@@ -16,9 +16,9 @@
             android:layout_height="70dp"
             android:src="@drawable/ic_profile"
             android:scaleType="fitCenter"
+            android:id="@+id/imageView"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/imageView" />
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             android:text="Personalize your experience"
             android:textColor="#FFF"
             android:id="@+id/textView2"
-            android:layout_below="@+id/imageView"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>

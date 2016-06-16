@@ -1,4 +1,4 @@
-package com.example.karanbatra.materialdesign.model;
+package com.example.karanbatra.productiveninja.model;
 
 /**
  * Created by KARAN.BATRA on 5/27/2016.

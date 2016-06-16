@@ -1,4 +1,4 @@
-package com.example.karanbatra.materialdesign.adapter;
+package com.example.karanbatra.productiveninja.adapter;
 
 /**
  * Created by karan on 9/6/16.
@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.karanbatra.materialdesign.R;
-import com.example.karanbatra.materialdesign.model.NavDrawerItem;
+import com.example.karanbatra.productiveninja.R;
+import com.example.karanbatra.productiveninja.model.NavDrawerItem;
 
 import java.util.Collections;
 import java.util.List;
