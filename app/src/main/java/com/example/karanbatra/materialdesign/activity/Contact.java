@@ -1,7 +1,5 @@
 package com.example.karanbatra.materialdesign.activity;
 
-import java.util.Date;
-
 /**
  * Created by neeraj.varshney on 6/3/2016.
  */
@@ -9,23 +7,28 @@ public class Contact {
     int _id;
 
     String _name;
-    Date dates;
-    int times;
+//    Date dates;
+    int seconds;
+    int minutes;
+    int hours;
 
     public Contact(){   }
-    public Contact(int id, String name, int times){
+    public Contact(int id, String name, int seconds, int minutes, int hours){
         this._id = id;
         this._name = name;
 
-        this.times=times;
-
+        this.seconds =seconds;
+        this.minutes = minutes;
+        this.hours = hours;
 
     }
 
-    public Contact(String name, int times){
+    public Contact(String name, int seconds, int minutes, int hours){
         this._name = name;
 
-        this.times=times;
+        this.seconds = seconds;
+        this.minutes=minutes;
+        this.hours = hours;
     }
     public int getID(){
         return this._id;
@@ -43,13 +46,27 @@ public class Contact {
         this._name = name;
     }
 
-    public int getTimes() {
-        return times;
+    public int getSeconds() {
+        return seconds;
     }
 
-    public void setTimes(int times) {
-        this.times = times;
+    public void setSeconds(int seconds) {
+        this.seconds = seconds;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
     }
 
 
+    public int getHours() {
+        return hours;
+    }
+    public void setHours(int hours) {
+        this.hours = hours;
+    }
 }

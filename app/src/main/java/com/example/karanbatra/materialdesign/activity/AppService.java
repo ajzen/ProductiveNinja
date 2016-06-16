@@ -1,6 +1,5 @@
 package com.example.karanbatra.materialdesign.activity;
 
-import android.app.ActivityManager;
 import android.app.Service;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
@@ -62,51 +61,41 @@ public class AppService extends Service {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             UsageStatsManager mUsageStatsManager = (UsageStatsManager)getSystemService(Context.USAGE_STATS_SERVICE);
             long time = System.currentTimeMillis();
-            // We get usage stats for the last 1 seconds
             List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, time -Integer.MAX_VALUE, time);
             // Sort the stats by the last time used
             if(stats != null) {
                 SortedMap<Long,UsageStats> mySortedMap = new TreeMap<Long,UsageStats>();
                 for (UsageStats usageStats : stats) {
                     mySortedMap.put(usageStats.getLastTimeUsed(),usageStats);
+                    Log.e(""+usageStats.getLastTimeUsed(), ""+usageStats);
                 }
                 if(mySortedMap != null && !mySortedMap.isEmpty()) {
                     topPackageName =  mySortedMap.get(mySortedMap.lastKey()).getPackageName();
-                    Log.e("TopPackage Name",topPackageName);
-                    //new code here
-
-                 //   db.addContact(new Contact(topPackageName.toString(),0));
                     List<Contact> contacts = db.getAllContacts();
-                        int flag=0;
+                    int flag=0;
                     for (Contact cn : contacts) {
-                        String log = "Id: " + cn.getID() + " ,Name: " + cn.getName() + " ,TIMES: " +
-                                cn.getTimes()+"\n";
-                        //System.out.println(log);
+                        String log = "Id: " + cn.getID() + " ,Name: " + cn.getName() + " ,Seconds: " +
+                        cn.getSeconds()+ ", Minutes: " + cn.getMinutes() + ", Hours: " + cn.getHours() + "\n";
                         if(cn.getName().equals(topPackageName.toString()))
                         {
                             flag=1;
-                            db.updateContact(new Contact(cn.getID(),topPackageName.toString(),cn.getTimes()+1));
+                            if(cn.getSeconds()==60){
+                                if(cn.getMinutes()==59)
+                                    db.updateContact(new Contact(cn.getID(),topPackageName.toString(),0,0,  cn.getHours()+1));
+                                else
+                                    db.updateContact(new Contact(cn.getID(),topPackageName.toString(),0,cn.getMinutes()+1,  cn.getHours()));
+                            }else
+                                db.updateContact(new Contact(cn.getID(),topPackageName.toString(),cn.getSeconds()+1, cn.getMinutes(), cn.getHours()));
                         }
                         Log.e("database",log);
                     }
                     if(flag==0)
-                        db.addContact(new Contact(topPackageName.toString(),0));
-
-//new code till here
+                        db.addContact(new Contact(topPackageName.toString(),0, 0,0));
 
                 }else{
                     topPackageName=null;
                 }
             }
-        }
-        else
-        {
-            ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-            List<ActivityManager.RunningAppProcessInfo> runningAppProcessInfo = am.getRunningAppProcesses();
-            for (int i = 0; i < runningAppProcessInfo.size(); i++) {
-                Log.d("hhh",runningAppProcessInfo.get(i).processName);
-            }
-
         }
 
     }

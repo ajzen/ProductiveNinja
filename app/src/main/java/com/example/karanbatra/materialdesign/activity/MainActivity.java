@@ -12,7 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.karanbatra.materialdesign.R;
 
@@ -21,26 +20,26 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
 
+    public static final String TAG = "MainActivity";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-        startActivity(intent);
-        startService(new Intent(this, AppService.class));
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
         drawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
         drawerFragment.setDrawerListener(this);
         displayView(0);
-
 
     }
 
@@ -61,12 +60,16 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+            startActivity(intent);
+
+            startService(new Intent(this, AppService.class));
             return true;
         }
-        if(id == R.id.action_search){
-            Toast.makeText(getApplicationContext(), "Search action is selected!", Toast.LENGTH_SHORT).show();
-            return true;
-        }
+//        if(id == R.id.action_search){
+//            Toast.makeText(getApplicationContext(), "Search action is selected!", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
         return super.onOptionsItemSelected(item);
     }
 
