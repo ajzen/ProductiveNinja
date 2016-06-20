@@ -67,7 +67,7 @@ public class AppService extends Service {
                 SortedMap<Long,UsageStats> mySortedMap = new TreeMap<Long,UsageStats>();
                 for (UsageStats usageStats : stats) {
                     mySortedMap.put(usageStats.getLastTimeUsed(),usageStats);
-                    Log.e(""+usageStats.getLastTimeUsed(), ""+usageStats);
+//                    Log.e(""+usageStats.getLastTimeUsed(), ""+usageStats);
                 }
                 if(mySortedMap != null && !mySortedMap.isEmpty()) {
                     topPackageName =  mySortedMap.get(mySortedMap.lastKey()).getPackageName();
@@ -79,7 +79,7 @@ public class AppService extends Service {
                         if(cn.getName().equals(topPackageName.toString()))
                         {
                             flag=1;
-                            if(cn.getSeconds()==60){
+                            if(cn.getSeconds()==59){
                                 if(cn.getMinutes()==59)
                                     db.updateContact(new Contact(cn.getID(),topPackageName.toString(),0,0,  cn.getHours()+1));
                                 else
@@ -87,7 +87,7 @@ public class AppService extends Service {
                             }else
                                 db.updateContact(new Contact(cn.getID(),topPackageName.toString(),cn.getSeconds()+1, cn.getMinutes(), cn.getHours()));
                         }
-                        Log.e("database",log);
+//                        Log.e("database",log);
                     }
                     if(flag==0)
                         db.addContact(new Contact(topPackageName.toString(),0, 0,0));

@@ -18,15 +18,6 @@ public class AnalyticsFragment extends Fragment {
     TextView social;
     TextView communication;
     TextView media;
-    int social_sec=0;
-    int social_min=0;
-    int social_hours=0;
-    int media_sec=0;
-    int media_min=0;
-    int media_hours=0;
-    int comm_sec=0;
-    int comm_min=0;
-    int comm_hours=0;
     public AnalyticsFragment() {
         // Required empty public constructor
 
@@ -47,20 +38,12 @@ public class AnalyticsFragment extends Fragment {
         List<Contact> arr = db.getAllContacts();
         for(Contact c : arr){
             if(c.getName().equals("com.android.chrome") || c.getName().equals("com.google.android.gm")){
-                comm_hours += c.getHours();
-                comm_min += c.getMinutes();
-                comm_sec += c.getSeconds();
-                communication.setText(comm_hours+":" + comm_min+":"+comm_sec);
+
+                communication.setText(c.getHours()+":" + c.getMinutes()+":"+c.getSeconds());
             }else if(c.getName().equals("com.google.android.youtube") || c.getName().equals("bitsie.playmee.musicplayer.free")){
-                media_hours += c.getHours();
-                media_min += c.getMinutes();
-                media_sec += c.getSeconds();
-                media.setText(media_hours+":" +media_min+":"+media_sec);
+                media.setText(c.getHours()+":" +c.getMinutes()+":"+c.getSeconds());
             }else if(c.getName().equals("com.whatsapp")){
-                social_hours += c.getHours();
-                social_min += c.getMinutes();
-                social_sec += c.getSeconds();
-                social.setText(social_hours+":" +social_min+":"+social_sec);
+                social.setText(c.getHours()+":" +c.getMinutes()+":"+c.getSeconds());
             }
         }
         // Inflate the layout for this fragment
@@ -74,20 +57,12 @@ public class AnalyticsFragment extends Fragment {
         List<Contact> arr = db.getAllContacts();
         for(Contact c : arr){
             if(c.getName().equals("com.android.chrome") || c.getName().equals("com.google.android.gm")){
-                comm_hours += c.getHours();
-                comm_min += c.getMinutes();
-                comm_sec += c.getSeconds();
-                communication.setText(comm_hours+":" + comm_min+":"+comm_sec);
+
+                communication.setText(c.getHours()+":" + c.getMinutes()+":"+c.getSeconds());
             }else if(c.getName().equals("com.google.android.youtube") || c.getName().equals("bitsie.playmee.musicplayer.free")){
-                media_hours += c.getHours();
-                media_min += c.getMinutes();
-                media_sec += c.getSeconds();
-                media.setText(media_hours+":" +media_min+":"+media_sec);
+                media.setText(c.getHours()+":" +c.getMinutes()+":"+c.getSeconds());
             }else if(c.getName().equals("com.whatsapp")){
-                social_hours += c.getHours();
-                social_min += c.getMinutes();
-                social_sec += c.getSeconds();
-                social.setText(social_hours+":" +social_min+":"+social_sec);
+                social.setText(c.getHours()+":" +c.getMinutes()+":"+c.getSeconds());
             }
         }
     }
