@@ -35,9 +35,8 @@
         <activity
             android:name=".activity.SocialActivity"
             android:label="@string/title_activity_social"
-            android:theme="@style/MyMaterialTheme"
-            android:parentActivityName=".activity.MainActivity">
-        </activity>
+            android:parentActivityName=".activity.MainActivity"
+            android:theme="@style/MyMaterialTheme"></activity>
         <activity
             android:name=".activity.MediaActivity"
             android:label="@string/title_activity_media"
@@ -45,8 +44,11 @@
         <activity
             android:name=".activity.CommunicationActivity"
             android:label="@string/title_activity_communication"
-            android:theme="@style/MyMaterialTheme">
-        </activity>
+            android:theme="@style/MyMaterialTheme"></activity>
+        <activity
+            android:name=".activity.Category"
+            android:label="@string/title_activity_category"
+            android:theme="@style/MyMaterialTheme"></activity>
     </application>
 
 </manifest>

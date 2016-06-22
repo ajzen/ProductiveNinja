@@ -13,14 +13,14 @@ import com.example.karanbatra.productiveninja.R;
 import java.util.ArrayList;
 
 /**
- * Created by KARAN.BATRA on 6/22/2016.
+ * Created by karan on 22/6/16.
  */
-public class MyBaseAdapter extends BaseAdapter{
-    ArrayList<ListData> myList = new ArrayList<ListData>();
+public class CategoryBaseAdapter extends BaseAdapter{
+    ArrayList<CategoryListData> myList = new ArrayList<CategoryListData>();
     LayoutInflater inflater;
     Context context;
 
-    public MyBaseAdapter(Context context, ArrayList myList){
+    public CategoryBaseAdapter(Context context, ArrayList myList){
         this.myList = myList;
         this.context = context;
         inflater = LayoutInflater.from(this.context);
@@ -31,7 +31,7 @@ public class MyBaseAdapter extends BaseAdapter{
     }
 
     @Override
-    public ListData getItem(int position) {
+    public CategoryListData getItem(int position) {
         return myList.get(position);
     }
 
@@ -44,29 +44,27 @@ public class MyBaseAdapter extends BaseAdapter{
         MyViewHolder mViewHolder;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item, parent, false);
+            convertView = inflater.inflate(R.layout.category_list_item, parent, false);
             mViewHolder = new MyViewHolder(convertView);
             convertView.setTag(mViewHolder);
         } else {
             mViewHolder = (MyViewHolder) convertView.getTag();
         }
 
-        ListData currentListData = getItem(position);
-
+        CategoryListData currentListData = getItem(position);
         mViewHolder.name.setText(currentListData.getName());
-        mViewHolder.time.setText(currentListData.getTime());
         mViewHolder.ivIcon.setImageBitmap(currentListData.getImgBitMap());
 
         return convertView;
     }
     private class MyViewHolder {
-        TextView name, time;
+        TextView name;
         ImageView ivIcon;
 
         public MyViewHolder(View item) {
-            name = (TextView) item.findViewById(R.id.list_item_name_detail);
-            time = (TextView) item.findViewById(R.id.list_item_time_detail);
-            ivIcon = (ImageView) item.findViewById(R.id.list_item_icon);
+            name = (TextView) item.findViewById(R.id.category_list_name);
+            ivIcon = (ImageView) item.findViewById(R.id.category_list_image);
         }
     }
+
 }

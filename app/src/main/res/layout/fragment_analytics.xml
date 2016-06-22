@@ -31,7 +31,6 @@
         android:textColor="#FFF"
         android:textColorHint="#FFF"
         android:textSize="35dp"
-        android:layout_marginTop="39dp"
         android:layout_below="@+id/communication_button"
         android:layout_centerHorizontal="true" />
 

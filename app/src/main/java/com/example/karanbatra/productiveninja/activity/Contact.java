@@ -10,6 +10,7 @@ public class Contact {
     int minutes;
     int hours;
 
+
     public Contact(){   }
     public Contact(int id, String name, int seconds, int minutes, int hours){
         this._id = id;
