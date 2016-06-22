@@ -152,5 +152,29 @@ class DBHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Contact getContact(String packagename) {
+        Contact contact = new Contact();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                if(cursor.getString(1).equals(packagename)) {
+                    contact.setID(Integer.parseInt(cursor.getString(0)));
+                    contact.setName(cursor.getString(1));
+                    contact.setSeconds(cursor.getInt(2));
+                    contact.setMinutes(cursor.getInt(3));
+                    contact.setHours(cursor.getInt(4));
+                    break;
+                }
+            } while (cursor.moveToNext());
+        }
+
+        // return contact list
+        return contact;
+    }
 
 }

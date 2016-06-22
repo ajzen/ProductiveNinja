@@ -5,9 +5,7 @@ package com.example.karanbatra.productiveninja.activity;
  */
 public class Contact {
     int _id;
-
     String _name;
-//    Date dates;
     int seconds;
     int minutes;
     int hours;
@@ -21,6 +19,10 @@ public class Contact {
         this.minutes = minutes;
         this.hours = hours;
 
+    }
+
+    public Contact(String name){
+        this._name = name;
     }
 
     public Contact(String name, int seconds, int minutes, int hours){

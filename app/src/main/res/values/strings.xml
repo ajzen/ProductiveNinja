@@ -42,5 +42,7 @@
     <string name="slide_4_desc">Get to know the 7 day forecast of your city and share it with your friends on the go.</string>
 
     <string name="title_activity_social">SocialActivity</string>
+    <string name="title_activity_media">MediaActivity</string>
+    <string name="title_activity_communication">CommunicationActivity</string>
 
 </resources>

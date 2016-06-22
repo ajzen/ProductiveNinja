@@ -8,13 +8,14 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
     <application
         android:allowBackup="true"
-        android:icon="@drawable/social"
+        android:icon="@drawable/launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/MyMaterialTheme">
-        <activity android:name="com.example.karanbatra.productiveninja.activity.WelcomeActivity">
+        <activity android:name=".activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,15 +23,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.karanbatra.productiveninja.activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/title_activity_welcome"
             android:theme="@style/MyMaterialTheme" />
 
         <service
-            android:name="com.example.karanbatra.productiveninja.activity.AppService"
+            android:name=".activity.AppService"
             android:enabled="true"
             android:exported="false" />
 
+        <activity
+            android:name=".activity.SocialActivity"
+            android:label="@string/title_activity_social"
+            android:theme="@style/MyMaterialTheme"
+            android:parentActivityName=".activity.MainActivity">
+        </activity>
+        <activity
+            android:name=".activity.MediaActivity"
+            android:label="@string/title_activity_media"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".activity.CommunicationActivity"
+            android:label="@string/title_activity_communication"
+            android:theme="@style/MyMaterialTheme">
+        </activity>
     </application>
 
 </manifest>

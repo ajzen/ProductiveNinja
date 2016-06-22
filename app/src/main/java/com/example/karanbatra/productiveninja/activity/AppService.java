@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 
 import java.util.List;
 import java.util.SortedMap;
@@ -22,7 +20,6 @@ public class AppService extends Service {
     long millis;
     long millisend;
     Button b;
-    EditText mess;
 
     DBHelper db = new DBHelper(this);
     public AppService() {
@@ -67,15 +64,12 @@ public class AppService extends Service {
                 SortedMap<Long,UsageStats> mySortedMap = new TreeMap<Long,UsageStats>();
                 for (UsageStats usageStats : stats) {
                     mySortedMap.put(usageStats.getLastTimeUsed(),usageStats);
-//                    Log.e(""+usageStats.getLastTimeUsed(), ""+usageStats);
                 }
                 if(mySortedMap != null && !mySortedMap.isEmpty()) {
                     topPackageName =  mySortedMap.get(mySortedMap.lastKey()).getPackageName();
                     List<Contact> contacts = db.getAllContacts();
                     int flag=0;
                     for (Contact cn : contacts) {
-                        String log = "Id: " + cn.getID() + " ,Name: " + cn.getName() + " ,Seconds: " +
-                        cn.getSeconds()+ ", Minutes: " + cn.getMinutes() + ", Hours: " + cn.getHours() + "\n";
                         if(cn.getName().equals(topPackageName.toString()))
                         {
                             flag=1;
@@ -87,7 +81,6 @@ public class AppService extends Service {
                             }else
                                 db.updateContact(new Contact(cn.getID(),topPackageName.toString(),cn.getSeconds()+1, cn.getMinutes(), cn.getHours()));
                         }
-//                        Log.e("database",log);
                     }
                     if(flag==0)
                         db.addContact(new Contact(topPackageName.toString(),0, 0,0));
