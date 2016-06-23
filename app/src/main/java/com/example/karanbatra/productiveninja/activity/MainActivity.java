@@ -66,10 +66,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             startService(new Intent(this, AppService.class));
             return true;
         }
-//        if(id == R.id.action_search){
-//            Toast.makeText(getApplicationContext(), "Search action is selected!", Toast.LENGTH_SHORT).show();
-//            return true;
-//        }
+        if(id == R.id.action_category){
+            startActivity(new Intent(this, Category.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

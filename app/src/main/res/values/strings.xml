@@ -9,8 +9,8 @@
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
-
-
+    <string name="category">Category</string>
+    <string name="save">Save</string>
     <string name="nav_item_analytics">Analytics</string>
     <string name="nav_item_weather">Weather</string>
     <string name="nav_item_notes">Notes</string>
@@ -45,5 +45,6 @@
     <string name="title_activity_media">MediaActivity</string>
     <string name="title_activity_communication">CommunicationActivity</string>
     <string name="title_activity_category">Category</string>
+    <string name="title_activity_category_spinner">CategorySpinner</string>
 
 </resources>

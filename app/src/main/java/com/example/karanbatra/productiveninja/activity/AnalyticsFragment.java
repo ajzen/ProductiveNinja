@@ -63,8 +63,7 @@ public class AnalyticsFragment extends Fragment {
         btnSocial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String time = social_min+" "+social_seconds;
-                startActivity(new Intent(getActivity(), Category.class));
+                startActivity(new Intent(getActivity(), SocialActivity.class));
             }
         });
 

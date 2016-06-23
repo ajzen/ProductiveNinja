@@ -1,9 +1,7 @@
 package com.example.karanbatra.productiveninja.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,13 +9,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.example.karanbatra.productiveninja.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class SocialActivity extends AppCompatActivity {
     ArrayList<ListData> myList = new ArrayList<ListData>();
@@ -60,7 +56,6 @@ public class SocialActivity extends AppCompatActivity {
         }
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(new MyBaseAdapter(context, myList));
-        startActivity(new Intent(this, Category.class));
     }
 
 }
