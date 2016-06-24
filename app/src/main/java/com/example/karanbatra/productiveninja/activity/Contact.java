@@ -10,8 +10,10 @@ public class Contact {
     int minutes;
     int hours;
 
+    String category;
 
     public Contact(){   }
+
     public Contact(int id, String name, int seconds, int minutes, int hours){
         this._id = id;
         this._name = name;
@@ -19,11 +21,17 @@ public class Contact {
         this.seconds =seconds;
         this.minutes = minutes;
         this.hours = hours;
-
     }
 
-    public Contact(String name){
+    public Contact(int id, String name, int seconds, int minutes, int hours, String category){
+        this._id = id;
         this._name = name;
+
+        this.seconds =seconds;
+        this.minutes = minutes;
+        this.hours = hours;
+
+        this.category = category;
     }
 
     public Contact(String name, int seconds, int minutes, int hours){
@@ -32,6 +40,15 @@ public class Contact {
         this.seconds = seconds;
         this.minutes=minutes;
         this.hours = hours;
+    }
+
+    public Contact(String name, int seconds, int minutes, int hours, String category){
+        this._name = name;
+
+        this.seconds = seconds;
+        this.minutes=minutes;
+        this.hours = hours;
+        this.category = category;
     }
     public int getID(){
         return this._id;
@@ -53,6 +70,7 @@ public class Contact {
         return seconds;
     }
 
+
     public void setSeconds(int seconds) {
         this.seconds = seconds;
     }
@@ -72,4 +90,9 @@ public class Contact {
     public void setHours(int hours) {
         this.hours = hours;
     }
+
+
+    public String getCategory(){ return category;}
+    public void setCategory(String category){ this.category = category;}
+
 }

@@ -90,10 +90,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 //                fragment = new WeatherFragment();
 //                title = getString(R.string.title_weather);
 //                break;
-            case 2:
-                fragment = new NotesFragment();
-                title = getString(R.string.title_notes);
-                break;
             default:
                 break;
         }

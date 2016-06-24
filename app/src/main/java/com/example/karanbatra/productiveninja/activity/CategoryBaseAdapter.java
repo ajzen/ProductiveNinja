@@ -53,7 +53,6 @@ public class CategoryBaseAdapter extends BaseAdapter{
         } else {
             mViewHolder = (MyViewHolder) convertView.getTag();
         }
-
         CategoryListData currentListData = getItem(position);
         mViewHolder.name.setText(currentListData.getName());
         mViewHolder.ivIcon.setImageBitmap(currentListData.getImgBitMap());
@@ -70,5 +69,4 @@ public class CategoryBaseAdapter extends BaseAdapter{
             spinner = (Spinner) item.findViewById(R.id.category_list_spinner);
         }
     }
-
 }

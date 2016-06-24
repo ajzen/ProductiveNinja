@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
-import android.widget.Button;
 
 import java.util.List;
 import java.util.SortedMap;
@@ -18,8 +17,6 @@ public class AppService extends Service {
     Handler mHandler;
     Runnable mRunnable;
     long millis;
-    long millisend;
-    Button b;
 
     DBHelper db = new DBHelper(this);
     public AppService() {
@@ -30,8 +27,6 @@ public class AppService extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
-
-
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -46,9 +41,6 @@ public class AppService extends Service {
             }
         };
         mRunnable.run();
-
-
-
         return super.onStartCommand(intent, flags, startId);
     }
 

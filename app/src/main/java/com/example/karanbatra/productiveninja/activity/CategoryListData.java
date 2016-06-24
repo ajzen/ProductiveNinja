@@ -9,6 +9,7 @@ public class CategoryListData {
     String name;
     Bitmap imgBitMap;
 
+
     public String getName(){ return this.name; }
     public Bitmap getImgBitMap(){ return this.imgBitMap; }
 

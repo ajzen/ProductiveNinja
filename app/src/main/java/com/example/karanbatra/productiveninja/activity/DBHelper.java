@@ -60,22 +60,6 @@ class DBHelper extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    // code to get the single contact
-//    Contact getContact(int id) {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-//                        KEY_NAME, KEY_SECONDS,KEY_MINUTES, KEY_HOURS }, KEY_ID + "=?",
-//                new String[] { String.valueOf(id) }, null, null, null, null);
-//        if (cursor != null)
-//            cursor.moveToFirst();
-//
-//        Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
-//                cursor.getString(1), cursor.getInt(2), cursor.getInt(3), cursor.getInt(4));
-//        // return contact
-//        return contact;
-//    }
-
     // code to get all contacts in a list view
     public List<Contact> getAllContacts() {
         List<Contact> contactList = new ArrayList<Contact>();
@@ -124,33 +108,6 @@ class DBHelper extends SQLiteOpenHelper {
                 new String[] { String.valueOf(contact.getID()) });
         db.close();
     }
-
-    // Getting contacts Count
-//    public int getContactsCount() {
-//        String countQuery = "SELECT  * FROM " + TABLE;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(countQuery, null);
-//        cursor.close();
-//
-//        // return count
-//        return cursor.getCount();
-//    }
-
-//    public ArrayList<String> getAppCategoryDetails(){
-//        String selectQuery = "SELECT * FROM " + TABLE;
-//        ArrayList<String> data = new ArrayList<>();
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery(selectQuery, null);
-//
-//        if(cursor.moveToFirst()){
-//            do{
-//                String input = cursor.getString(1);
-//                data.add(input);
-//            }while(cursor.moveToNext());
-//        }
-//        cursor.close();
-//        return data;
-//    }
 
     public Contact getContact(String packagename) {
         Contact contact = new Contact();
