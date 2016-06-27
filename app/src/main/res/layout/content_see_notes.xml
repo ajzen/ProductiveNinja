@@ -12,4 +12,10 @@
     tools:context="com.example.karanbatra.productiveninja.activity.SeeNotes"
     tools:showIn="@layout/activity_see_notes">
 
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/notes_list_view"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
