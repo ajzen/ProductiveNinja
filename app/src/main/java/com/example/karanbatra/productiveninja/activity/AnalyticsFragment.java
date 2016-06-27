@@ -1,6 +1,8 @@
 package com.example.karanbatra.productiveninja.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.karanbatra.productiveninja.R;
 
@@ -23,6 +27,8 @@ public class AnalyticsFragment extends Fragment {
     Button btnSocial;
     Button btnMedia;
     Button btnComm;
+    ImageView notesview;
+
     public AnalyticsFragment() {
         // Required empty public constructor
 
@@ -39,6 +45,14 @@ public class AnalyticsFragment extends Fragment {
         social = (TextView) rootView.findViewById(R.id.social_textview_value);
         media = (TextView) rootView.findViewById(R.id.media_textview_value);
         communication = (TextView) rootView.findViewById(R.id.communication_textview_value);
+        notesview=(ImageView) rootView.findViewById(R.id.notesid);
+        notesview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alertMessage();
+            }
+        });
 
         // Inflate the layout for this fragment
         return rootView;
@@ -84,6 +98,29 @@ public class AnalyticsFragment extends Fragment {
             }
         });
     }
+    public void alertMessage() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            public void onClick(
+                    DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        Toast.makeText(getActivity(), "create a new note", Toast.LENGTH_LONG).show();
+                        Intent intent=new Intent(getActivity(), CreateNote.class);
+                        startActivity(intent);
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
+                        Toast.makeText(getActivity(), "See notes", Toast.LENGTH_LONG).show();
+                        Intent intents=new Intent(getActivity(), SeeNotes.class);
+                        startActivity(intents);
+
+
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("create a new note ") .setPositiveButton("create", dialogClickListener) .setNegativeButton("see notes", dialogClickListener).show(); }
+
 
     @Override
     public void onAttach(Activity activity) {

@@ -33,6 +33,13 @@
         android:textSize="35dp"
         android:layout_below="@+id/communication_button"
         android:layout_centerHorizontal="true" />
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/notesid"
+        android:layout_alignTop="@+id/label"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/note" />
 
     <TableLayout
         android:layout_width="match_parent"
