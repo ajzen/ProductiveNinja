@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -54,22 +55,44 @@ public class Category extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Integer[] arr = categoryBaseAdapter.spinnerSelection();
+                for(int i = 0;i < arr.length; i++){
+                    Log.e("Karan", arr[i]+"");
+                }
+                Integer zero = new Integer(0);
+                Integer one = new Integer(1);
+                Integer two = new Integer(2);
+                Integer three  = new Integer(3);
+                List<Contact> contacts = db.getAllContacts();
                 for (int i = 0; i < myList.size(); i++) {
                     String category;
-                    if(arr[i].equals(0)){
+                    if(arr[i].equals(zero)){
                         category="Social";
-                    }else if(arr[i].equals(1)){
+                    }else if(arr[i].equals(one)){
                         category="Games";
-                    }else if(arr[i].equals(2)){
+                    }else if(arr[i].equals(two)){
                         category="Media";
-                    }else if(arr[i].equals(3)){
+                    }else if(arr[i].equals(three)){
                         category="Communication";
                     }else{
                         category="Other";
                     }
                     CategoryListData ld = myList.get(i);
                     String appName = ld.getName();
-                    db.addContact(new Contact(appName, 0, 0, 0, category));
+                    int flag = 0;
+                    for (Contact cn : contacts) {
+                        if (cn.getName().equals(myList.get(i).getName())) {
+//                            Log.e(cn.getName(), category);
+                            flag = 1;
+                            db.deleteContact(cn);
+                            db.addContact(new Contact(appName, 0, 0, 0, category));
+                        }
+                    }
+                    if (flag == 0)
+                        db.addContact(new Contact(appName, 0, 0, 0, category));
+                }
+                contacts = db.getAllContacts();
+                for(Contact c : contacts){
+                    Log.e("KARAN", c.getName()+" "+c.getCategory());
                 }
             }
         });

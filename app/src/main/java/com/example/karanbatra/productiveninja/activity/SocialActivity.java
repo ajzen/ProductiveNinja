@@ -9,14 +9,16 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.example.karanbatra.productiveninja.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SocialActivity extends AppCompatActivity {
-    ArrayList<ListData> myList = new ArrayList<ListData>();
+    ArrayList<ListData> myList = new ArrayList<>();
     Context context = SocialActivity.this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,31 +27,34 @@ public class SocialActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         try{
-            ApplicationInfo app = getPackageManager().getApplicationInfo("com.whatsapp", 0);
             DBHelper db = new DBHelper(this);
-            Contact c = db.getContact("com.whatsapp");
-            Drawable icon = getPackageManager().getApplicationIcon(app);
-            Bitmap bitmap = ((BitmapDrawable)icon).getBitmap();
-            String name = getPackageManager().getApplicationLabel(app).toString();
-            ListData ld = new ListData();
-            ld.setName(name);
-            int min = c.getMinutes();
-            int seconds = c.getSeconds();
-            if(min < 10){
-                if(seconds < 10){
-                    ld.setTime("0"+min+" : "+"0"+seconds);
+            List<Contact> list = db.getCategoryContacts("Social");
+            for(int i = 0;i < list.size(); i++){
+                Log.e("Karan", list.get(i).getName());
+                ApplicationInfo app = getPackageManager().getApplicationInfo("com.whatsapp", 0);
+                Drawable icon = getPackageManager().getApplicationIcon(app);
+                Bitmap bitmap = ((BitmapDrawable)icon).getBitmap();
+                String name = list.get(i).getName();
+                ListData ld = new ListData();
+                ld.setName(name);
+                int min = list.get(i).getMinutes();
+                int seconds = list.get(i).getSeconds();
+                if(min < 10){
+                    if(seconds < 10){
+                        ld.setTime("0"+min+" : "+"0"+seconds);
+                    }else{
+                        ld.setTime("0"+min+" : "+seconds);
+                    }
                 }else{
-                    ld.setTime("0"+min+" : "+seconds);
+                    if(seconds < 10){
+                        ld.setTime(min+" : "+"0"+seconds);
+                    }else{
+                        ld.setTime(min+" : "+seconds);
+                    }
                 }
-            }else{
-                if(seconds < 10){
-                    ld.setTime(min+" : "+"0"+seconds);
-                }else{
-                    ld.setTime(min+" : "+seconds);
-                }
+                ld.setImgBitMap(bitmap);
+                myList.add(ld);
             }
-            ld.setImgBitMap(bitmap);
-            myList.add(ld);
         }
         catch(PackageManager.NameNotFoundException e){
 

@@ -76,7 +76,6 @@ public class AppService extends Service {
                     }
                     if (flag == 0)
                         db.addContact(new Contact(topPackageName.toString(), 0, 0, 0));
-
                 } else {
                     topPackageName = null;
                 }

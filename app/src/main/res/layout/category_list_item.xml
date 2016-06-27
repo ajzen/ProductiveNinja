@@ -6,7 +6,7 @@
     android:padding="10dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -17,7 +17,7 @@
 
         <TextView
             android:id="@+id/category_list_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingLeft="10dp" />
@@ -26,7 +26,8 @@
 
     <Spinner
         android:id="@+id/category_list_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right" />
 
 </LinearLayout>
