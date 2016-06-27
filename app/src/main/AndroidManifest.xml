@@ -52,6 +52,14 @@
         <activity
             android:name=".activity.CategorySpinner"
             android:label="@string/title_activity_category_spinner"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".activity.CreateNote"
+            android:label="@string/title_activity_create_note"
+            android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".activity.SeeNotes"
+            android:label="@string/title_activity_see_notes"
             android:theme="@style/MyMaterialTheme"></activity>
     </application>
 

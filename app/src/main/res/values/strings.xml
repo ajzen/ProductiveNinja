@@ -46,5 +46,7 @@
     <string name="title_activity_communication">CommunicationActivity</string>
     <string name="title_activity_category">Category</string>
     <string name="title_activity_category_spinner">CategorySpinner</string>
+    <string name="title_activity_create_note">CreateNote</string>
+    <string name="title_activity_see_notes">SeeNotes</string>
 
 </resources>
