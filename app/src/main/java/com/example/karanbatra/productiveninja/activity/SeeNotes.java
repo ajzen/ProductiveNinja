@@ -21,7 +21,7 @@ public class SeeNotes extends AppCompatActivity {
         List<NotesFields> contacts = db.getAllContacts();
         for (NotesFields cn : contacts) {
             String log = "Id: " + cn.get_id() + " ,Name: " + cn.get_name()   +", contents: "+cn.get_contents() + " deletevar :" + cn.get_delelte_var() + "\n";
-            notes.add(cn.get_name() + "\n" + cn.get_contents() + "\n");
+            notes.add(cn.get_name() + "\t" + cn.get_contents() + "\n");
         }
         adapter = new ArrayAdapter<>(this, R.layout.notes_list_item, R.id.notes_item, notes);
         ListView listView = (ListView)findViewById(R.id.notes_list_view);

@@ -1,5 +1,6 @@
 package com.example.karanbatra.productiveninja.activity;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -60,13 +61,19 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
-            startActivity(intent);
+            try {
+                Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+                startActivity(intent);
+                startService(new Intent(this, AppService.class));
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
-            startService(new Intent(this, AppService.class));
+
             return true;
         }
-        if(id == R.id.action_category){
+
+        if (id == R.id.action_category) {
             startActivity(new Intent(this, Category.class));
             return true;
         }
@@ -78,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         displayView(position);
     }
 
-    private void displayView(int position){
+    private void displayView(int position) {
         Fragment fragment = null;
         String title = getString(R.string.app_name);
         switch (position) {

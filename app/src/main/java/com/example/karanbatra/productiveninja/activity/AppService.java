@@ -19,6 +19,7 @@ public class AppService extends Service {
     long millis;
 
     DBHelper db = new DBHelper(this);
+
     public AppService() {
     }
 
@@ -32,53 +33,52 @@ public class AppService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         millis = System.currentTimeMillis() / 1000;
 
-        mHandler=new Handler();
-        mRunnable=new Runnable() {
+        mHandler = new Handler();
+        mRunnable = new Runnable() {
             @Override
             public void run() {
-                mHandler.postDelayed(mRunnable,1000);
+                mHandler.postDelayed(mRunnable, 1000);
                 getTopActivtyFromLolipopOnwards();
             }
         };
         mRunnable.run();
-        return super.onStartCommand(intent, flags, startId);
+        return Service.START_STICKY;
     }
 
 
-    public void getTopActivtyFromLolipopOnwards(){
-        String topPackageName ;
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            UsageStatsManager mUsageStatsManager = (UsageStatsManager)getSystemService(Context.USAGE_STATS_SERVICE);
+    public void getTopActivtyFromLolipopOnwards() {
+        String topPackageName;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            UsageStatsManager mUsageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
             long time = System.currentTimeMillis();
-            List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, time -Integer.MAX_VALUE, time);
+            List<UsageStats> stats = mUsageStatsManager.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, time - Integer.MAX_VALUE, time);
             // Sort the stats by the last time used
-            if(stats != null) {
-                SortedMap<Long,UsageStats> mySortedMap = new TreeMap<Long,UsageStats>();
+            if (stats != null) {
+                SortedMap<Long, UsageStats> mySortedMap = new TreeMap<Long, UsageStats>();
                 for (UsageStats usageStats : stats) {
-                    mySortedMap.put(usageStats.getLastTimeUsed(),usageStats);
+                    mySortedMap.put(usageStats.getLastTimeUsed(), usageStats);
                 }
-                if(mySortedMap != null && !mySortedMap.isEmpty()) {
-                    topPackageName =  mySortedMap.get(mySortedMap.lastKey()).getPackageName();
+                if (mySortedMap != null && !mySortedMap.isEmpty()) {
+                    topPackageName = mySortedMap.get(mySortedMap.lastKey()).getPackageName();
                     List<Contact> contacts = db.getAllContacts();
-                    int flag=0;
+                    int flag = 0;
                     for (Contact cn : contacts) {
-                        if(cn.getName().equals(topPackageName.toString()))
-                        {
-                            flag=1;
-                            if(cn.getSeconds()==59){
-                                if(cn.getMinutes()==59)
-                                    db.updateContact(new Contact(cn.getID(),topPackageName.toString(),0,0,  cn.getHours()+1));
+                        if (cn.getName().equals(topPackageName.toString())) {
+                            flag = 1;
+                            if (cn.getSeconds() == 59) {
+                                if (cn.getMinutes() == 59)
+                                    db.updateContact(new Contact(cn.getID(), topPackageName.toString(), 0, 0, cn.getHours() + 1));
                                 else
-                                    db.updateContact(new Contact(cn.getID(),topPackageName.toString(),0,cn.getMinutes()+1,  cn.getHours()));
-                            }else
-                                db.updateContact(new Contact(cn.getID(),topPackageName.toString(),cn.getSeconds()+1, cn.getMinutes(), cn.getHours()));
+                                    db.updateContact(new Contact(cn.getID(), topPackageName.toString(), 0, cn.getMinutes() + 1, cn.getHours()));
+                            } else
+                                db.updateContact(new Contact(cn.getID(), topPackageName.toString(), cn.getSeconds() + 1, cn.getMinutes(), cn.getHours()));
                         }
                     }
-                    if(flag==0)
-                        db.addContact(new Contact(topPackageName.toString(),0, 0,0));
+                    if (flag == 0)
+                        db.addContact(new Contact(topPackageName.toString(), 0, 0, 0));
 
-                }else{
-                    topPackageName=null;
+                } else {
+                    topPackageName = null;
                 }
             }
         }

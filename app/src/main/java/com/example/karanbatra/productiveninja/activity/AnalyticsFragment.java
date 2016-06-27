@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.karanbatra.productiveninja.R;
 
@@ -104,12 +103,10 @@ public class AnalyticsFragment extends Fragment {
                     DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        Toast.makeText(getActivity(), "create a new note", Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(getActivity(), CreateNote.class);
                         startActivity(intent);
                         break;
                     case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
-                        Toast.makeText(getActivity(), "See notes", Toast.LENGTH_LONG).show();
                         Intent intents=new Intent(getActivity(), SeeNotes.class);
                         startActivity(intents);
 
