@@ -89,7 +89,6 @@ class DBHelper extends SQLiteOpenHelper {
     // code to update the single contact
     public int updateContact(Contact contact) {
         SQLiteDatabase db = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, contact.getName());
         values.put(KEY_SECONDS, contact.getSeconds());
@@ -107,30 +106,6 @@ class DBHelper extends SQLiteOpenHelper {
         db.delete(TABLE, KEY_ID + " = ?",
                 new String[] { String.valueOf(contact.getID()) });
         db.close();
-    }
-
-    public Contact getContact(String packagename) {
-        Contact contact = new Contact();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE;
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-            do {
-                if(cursor.getString(1).equals(packagename)) {
-                    contact.setID(Integer.parseInt(cursor.getString(0)));
-                    contact.setName(cursor.getString(1));
-                    contact.setSeconds(cursor.getInt(2));
-                    contact.setMinutes(cursor.getInt(3));
-                    contact.setHours(cursor.getInt(4));
-                    break;
-                }
-            } while (cursor.moveToNext());
-        }
-        // return contact list
-        return contact;
     }
 
     public List<Contact> getCategoryContacts(String category) {

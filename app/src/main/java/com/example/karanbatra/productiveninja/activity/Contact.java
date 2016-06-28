@@ -14,20 +14,13 @@ public class Contact {
 
     public Contact(){   }
 
-    public Contact(int id, String name, int seconds, int minutes, int hours){
+    public Contact(int id, String name, int seconds, int minutes, int hours, String category){
         this._id = id;
         this._name = name;
         this.seconds =seconds;
         this.minutes = minutes;
         this.hours = hours;
-    }
-
-    public Contact(String name, int seconds, int minutes, int hours){
-        this._name = name;
-
-        this.seconds = seconds;
-        this.minutes=minutes;
-        this.hours = hours;
+        this.category=category;
     }
 
     public Contact(String name, int seconds, int minutes, int hours, String category){
