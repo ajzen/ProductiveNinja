@@ -59,19 +59,40 @@ public class AnalyticsFragment extends Fragment {
 
     @Override
     public void onResume() {
+        int social_hours = 0;
+        int social_minutes = 0;
+        int social_seconds = 0;
+        int media_hours=0;
+        int media_minutes=0;
+        int media_seconds=0;
+        int comm_hours=0;
+        int comm_minutes=0;
+        int comm_seconds=0;
         super.onResume();
         DBHelper db = new DBHelper(getContext());
-        List<Contact> arr = db.getAllContacts();
-        for(Contact c : arr){
-            if(c.getName().equals("com.android.chrome") || c.getName().equals("com.google.android.gm")){
-                communication.setText(c.getHours()+":" + c.getMinutes()+":"+c.getSeconds());
-            }else if(c.getName().equals("com.google.android.youtube")){
-                media.setText(c.getHours()+":" +c.getMinutes()+":"+c.getSeconds());
-            }else if(c.getName().equals("com.whatsapp")){
-                social.setText(c.getHours()+":" +c.getMinutes()+":"+c.getSeconds());
-            }
+        List<Contact> list = db.getCategoryContacts("Social");
+        for(int i = 0;i < list.size(); i++){
+            social_hours+=list.get(i).getHours();
+            social_minutes+=list.get(i).getMinutes();
+            social_seconds+=list.get(i).getSeconds();
         }
+        social.setText(social_hours+":"+social_minutes+":"+social_seconds);
 
+        List<Contact> list_media = db.getCategoryContacts("Media");
+        for(int i = 0;i < list_media.size(); i++){
+            media_hours+=list_media.get(i).getHours();
+            media_minutes+=list_media.get(i).getMinutes();
+            media_seconds+=list_media.get(i).getSeconds();
+        }
+        media.setText(media_hours+":"+media_minutes+":"+media_seconds);
+
+        List<Contact> list_comm = db.getCategoryContacts("Communication");
+        for(int i = 0;i < list_comm.size(); i++){
+            comm_hours+=list_comm.get(i).getHours();
+            comm_minutes+=list_comm.get(i).getMinutes();
+            comm_seconds+=list_comm.get(i).getSeconds();
+        }
+        communication.setText(comm_hours+":"+comm_minutes+":"+comm_seconds);
         btnSocial = (Button)rootView.findViewById(R.id.social_button);
         btnSocial.setOnClickListener(new View.OnClickListener() {
             @Override
