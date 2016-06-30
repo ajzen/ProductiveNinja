@@ -61,10 +61,14 @@ public class AppService extends Service {
                 if (mySortedMap != null && !mySortedMap.isEmpty()) {
                     topPackageName = mySortedMap.get(mySortedMap.lastKey()).getPackageName();
                     List<Contact> contacts = db.getAllContacts();
-//                    int flag = 0;
                     for (Contact cn : contacts) {
+//                        if(topPackageName.toString().equals("com.whatsapp") && cn.getSeconds() >= 9){
+//                            Intent startHomescreen=new Intent(Intent.ACTION_MAIN);
+//                            startHomescreen.addCategory(Intent.CATEGORY_HOME);
+//                            startHomescreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            startActivity(startHomescreen);
+//                        }
                         if (cn.getName().equals(topPackageName.toString())) {
-//                            flag = 1;
                             if (cn.getSeconds() == 59) {
                                 if (cn.getMinutes() == 59)
                                     db.updateContact(new Contact(cn.getID(), topPackageName.toString(), 0, 0, cn.getHours() + 1, cn.getCategory()));
@@ -74,8 +78,6 @@ public class AppService extends Service {
                                 db.updateContact(new Contact(cn.getID(), topPackageName.toString(), cn.getSeconds() + 1, cn.getMinutes(), cn.getHours(), cn.getCategory()));
                         }
                     }
-//                    if (flag == 0)
-//                        db.addContact(new Contact(topPackageName.toString(), 0, 0, 0, "Social"));
                 } else {
                     topPackageName = null;
                 }

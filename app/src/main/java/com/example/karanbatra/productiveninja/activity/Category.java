@@ -1,6 +1,7 @@
 package com.example.karanbatra.productiveninja.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.graphics.Bitmap;
@@ -9,7 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -48,6 +51,16 @@ public class Category extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.category_listView);
         categoryBaseAdapter = new CategoryBaseAdapter(context, myList);
         listView.setAdapter(categoryBaseAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                CategoryListData cld = myList.get(position);
+                Log.e(cld.getName(),"Karan");
+                Intent intent = new Intent(getBaseContext(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, cld.getName());
+                startActivity(intent);
+            }
+        });
         savebtn = (Button) findViewById(R.id.save_button);
         savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +95,7 @@ public class Category extends AppCompatActivity {
                     if (flag == 0)
                         db.addContact(new Contact(packageNames.get(i), 0, 0, 0, category));
                 }
+                startActivity(new Intent(v.getContext(), MainActivity.class));
             }
         });
 

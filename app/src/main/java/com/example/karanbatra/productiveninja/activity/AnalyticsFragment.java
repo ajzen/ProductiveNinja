@@ -75,14 +75,23 @@ public class AnalyticsFragment extends Fragment {
             social_hours+=list.get(i).getHours();
             social_minutes+=list.get(i).getMinutes();
             social_seconds+=list.get(i).getSeconds();
+            if(social_seconds > 59){
+                social_minutes+=1;
+                social_seconds=0;
+            }
         }
         social.setText(social_hours+":"+social_minutes+":"+social_seconds);
+
 
         List<Contact> list_media = db.getCategoryContacts("Media");
         for(int i = 0;i < list_media.size(); i++){
             media_hours+=list_media.get(i).getHours();
             media_minutes+=list_media.get(i).getMinutes();
             media_seconds+=list_media.get(i).getSeconds();
+            if(media_seconds > 59){
+                media_minutes+=1;
+                media_seconds=0;
+            }
         }
         media.setText(media_hours+":"+media_minutes+":"+media_seconds);
 
@@ -91,8 +100,13 @@ public class AnalyticsFragment extends Fragment {
             comm_hours+=list_comm.get(i).getHours();
             comm_minutes+=list_comm.get(i).getMinutes();
             comm_seconds+=list_comm.get(i).getSeconds();
+            if(comm_seconds > 59){
+                comm_minutes+=1;
+                comm_seconds=0;
+            }
         }
         communication.setText(comm_hours+":"+comm_minutes+":"+comm_seconds);
+
         btnSocial = (Button)rootView.findViewById(R.id.social_button);
         btnSocial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,8 +144,6 @@ public class AnalyticsFragment extends Fragment {
                     case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
                         Intent intents=new Intent(getActivity(), SeeNotes.class);
                         startActivity(intents);
-
-
                         break;
                 }
             }

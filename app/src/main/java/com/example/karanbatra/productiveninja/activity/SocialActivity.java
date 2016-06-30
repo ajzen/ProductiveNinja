@@ -20,6 +20,7 @@ import java.util.List;
 public class SocialActivity extends AppCompatActivity {
     ArrayList<ListData> myList = new ArrayList<>();
     Context context = SocialActivity.this;
+    HashSet<String> present = new HashSet<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,10 @@ public class SocialActivity extends AppCompatActivity {
         try{
             DBHelper db = new DBHelper(this);
             List<Contact> list = db.getCategoryContacts("Social");
-            HashSet<String> present = new HashSet<>();
+//            for(int i = 0;i < present.size(); i++){
+//                if(!present.contains(list.get(i)))
+//                        present.remove();
+//            }
             for(int i = 0;i < list.size(); i++) {
                 if (!present.contains(list.get(i).getName())) {
                     ApplicationInfo app = getPackageManager().getApplicationInfo(list.get(i).getName(), 0);
@@ -56,8 +60,6 @@ public class SocialActivity extends AppCompatActivity {
                     ld.setImgBitMap(bitmap);
                     myList.add(ld);
                     present.add(list.get(i).getName());
-                }else{
-
                 }
             }
         }

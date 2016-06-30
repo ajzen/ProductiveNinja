@@ -8,6 +8,7 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.FLAG_ACTIVITY_NEW_TASK" />
 
     <application
         android:allowBackup="true"
@@ -57,6 +58,10 @@
             android:name=".activity.SeeNotes"
             android:label="@string/title_activity_see_notes"
             android:theme="@style/MyMaterialTheme" />
+        <activity
+            android:name=".activity.DetailActivity"
+            android:label="@string/title_activity_detail"
+            android:theme="@style/MyMaterialTheme"></activity>
     </application>
 
 </manifest>
