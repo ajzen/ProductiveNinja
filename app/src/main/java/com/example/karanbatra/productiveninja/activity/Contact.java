@@ -9,23 +9,24 @@ public class Contact {
     int seconds;
     int minutes;
     int hours;
-
+    int max_sec;
     String category;
 
     public Contact(){   }
 
-    public Contact(int id, String name, int seconds, int minutes, int hours, String category){
+    public Contact(int id, String name, int seconds, int minutes, int hours, String category,int max_sec){
         this._id = id;
         this._name = name;
         this.seconds =seconds;
         this.minutes = minutes;
         this.hours = hours;
         this.category=category;
+        this.max_sec=max_sec;
     }
 
-    public Contact(String name, int seconds, int minutes, int hours, String category){
+    public Contact(String name, int seconds, int minutes, int hours, String category,int max_sec){
         this._name = name;
-
+this.max_sec=max_sec;
         this.seconds = seconds;
         this.minutes=minutes;
         this.hours = hours;
@@ -72,6 +73,13 @@ public class Contact {
         this.hours = hours;
     }
 
+    public int getMax_sec() {
+        return max_sec;
+    }
+
+    public void setMax_sec(int max_sec) {
+        this.max_sec = max_sec;
+    }
 
     public String getCategory(){ return category;}
     public void setCategory(String category){ this.category = category;}

@@ -11,7 +11,7 @@ import java.util.List;
 
 class DBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "PRO";
+    private static final String DATABASE_NAME = "asdf";
     private static final String TABLE = "tree";
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
@@ -19,6 +19,8 @@ class DBHelper extends SQLiteOpenHelper {
     private static final String KEY_MINUTES="minutes";
     private static final String KEY_HOURS="hours";
     private static final String KEY_CATEGORY="category";
+    private static final String KEY_MAX="max";
+
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         //3rd argument to be passed is CursorFactory instance
@@ -28,7 +30,7 @@ class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE + "("
                 + KEY_ID + " INTEGER PRIMARY KEY ," + KEY_NAME + " TEXT,"
-                + KEY_SECONDS + " INTEGER ," + KEY_MINUTES + " INTEGER , " + KEY_HOURS+ " INTEGER , "+ KEY_CATEGORY+" TEXT"+")";
+                + KEY_SECONDS + " INTEGER ," + KEY_MINUTES + " INTEGER , " + KEY_HOURS+ " INTEGER , "+ KEY_CATEGORY+" TEXT ,"+KEY_MAX+ " INTEGER"+")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
 
@@ -52,6 +54,7 @@ class DBHelper extends SQLiteOpenHelper {
         values.put(KEY_MINUTES, contact.getMinutes());
         values.put(KEY_HOURS, contact.getHours());
         values.put(KEY_CATEGORY, contact.getCategory());
+        values.put(KEY_MAX,contact.getMax_sec());
         // Inserting Row
         db.insert(TABLE, null, values);
         //2nd argument is String containing nullColumnHack
@@ -77,6 +80,7 @@ class DBHelper extends SQLiteOpenHelper {
                 contact.setMinutes(cursor.getInt(3));
                 contact.setHours(cursor.getInt(4));
                 contact.setCategory(cursor.getString(5));
+                contact.setMax_sec(cursor.getInt(6));
                 // Adding contact to list
                 contactList.add(contact);
             } while (cursor.moveToNext());
@@ -95,6 +99,7 @@ class DBHelper extends SQLiteOpenHelper {
         values.put(KEY_MINUTES, contact.getMinutes());
         values.put(KEY_HOURS, contact.getHours());
         values.put(KEY_CATEGORY, contact.getCategory());
+        values.put(KEY_MAX,contact.getMax_sec());
         // updating row
         return db.update(TABLE, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(contact.getID()) });
@@ -123,6 +128,7 @@ class DBHelper extends SQLiteOpenHelper {
                     contact.setMinutes(cursor.getInt(3));
                     contact.setHours(cursor.getInt(4));
                     contact.setCategory(cursor.getString(5));
+                    contact.setMax_sec(cursor.getInt(6));
                     contactList.add(contact);
                 }
             } while (cursor.moveToNext());

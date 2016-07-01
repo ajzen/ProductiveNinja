@@ -48,5 +48,6 @@
     <string name="title_activity_category_spinner">CategorySpinner</string>
     <string name="title_activity_create_note">CreateNote</string>
     <string name="title_activity_see_notes">SeeNotes</string>
+    <string name="title_activity_detail">DetailActivity</string>
 
 </resources>

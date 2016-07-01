@@ -4,11 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.karanbatra.productiveninja.R;
@@ -37,6 +35,9 @@ public class CategoryBaseAdapter extends BaseAdapter {
         categories.add("Communication");
         categories.add("Other");
         spinnerPosition = new Integer[myList.size()];
+        for(int i = 0;i < spinnerPosition.length; i++){
+            spinnerPosition[i] = 0;
+        }
         dataAdapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
@@ -65,7 +66,7 @@ public class CategoryBaseAdapter extends BaseAdapter {
             mViewHolder = new MyViewHolder();
             mViewHolder.name = (TextView) convertView.findViewById(R.id.category_list_name);
             mViewHolder.ivIcon = (ImageView) convertView.findViewById(R.id.category_list_image);
-            mViewHolder.spinner = (Spinner) convertView.findViewById(R.id.category_list_spinner);
+//            mViewHolder.spinner = (Spinner) convertView.findViewById(R.id.category_list_spinner);
             convertView.setTag(mViewHolder);
         } else {
             mViewHolder = (MyViewHolder) convertView.getTag();
@@ -73,31 +74,30 @@ public class CategoryBaseAdapter extends BaseAdapter {
         CategoryListData currentListData = getItem(position);
         mViewHolder.name.setText(currentListData.getName());
         mViewHolder.ivIcon.setImageBitmap(currentListData.getImgBitMap());
-        mViewHolder.spinner.setAdapter(dataAdapter);
-        mViewHolder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int p, long id) {
-                spinnerPosition[position] = p;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        if (spinnerPosition[position] != null) {
-            mViewHolder.spinner.setSelection(spinnerPosition[position]);
-        } else {
-            mViewHolder.spinner.setSelection(0);
-        }
-
+//        mViewHolder.spinner.setAdapter(dataAdapter);
+//        mViewHolder.spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int p, long id) {
+//                spinnerPosition[position] = p;
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//        if (spinnerPosition[position] != null) {
+//            mViewHolder.spinner.setSelection(spinnerPosition[position]);
+//        } else {
+//            mViewHolder.spinner.setSelection(0);
+//        }
         return convertView;
     }
 
     private static class MyViewHolder {
         TextView name;
         ImageView ivIcon;
-        Spinner spinner;
+//        Spinner spinner;
     }
 
     public Integer[] spinnerSelection() {
