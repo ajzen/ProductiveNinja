@@ -18,6 +18,7 @@ import android.widget.ListView;
 
 import com.example.karanbatra.productiveninja.R;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,8 +97,20 @@ public class Category extends AppCompatActivity {
                         db.addContact(new Contact(packageNames.get(i), 0, 0, 0, category));
                 }
                 startActivity(new Intent(v.getContext(), MainActivity.class));
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                CategoryListData cld = myList.get(position);
+                Log.e(cld.getName(),"Karan");
+                Intent intent = new Intent(getBaseContext(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, cld.getName());
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                cld.getImgBitMap().compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                intent.putExtra("image",byteArray);
+                intent.putExtra("packagename", packageNames.get(position));
+
+                startActivity(intent);
             }
         });
-
+        savebtn = (Button) findViewById(R.id.save_button);
     }
 }

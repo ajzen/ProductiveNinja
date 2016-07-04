@@ -19,4 +19,39 @@
         android:id="@+id/name"
         android:text="Karan"
         android:layout_alignParentTop="true" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/finalimage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="57dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/maxSeconds"
+        android:layout_alignBottom="@+id/finalimage"
+        android:layout_alignEnd="@+id/name"
+        android:hint="enter max seconds" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="save"
+        android:id="@+id/savebutton"
+
+        android:layout_marginTop="28dp"
+        android:layout_below="@+id/category_list_spinner"
+        android:layout_centerHorizontal="true" />
+    <Spinner
+    android:id="@+id/category_list_spinner"
+    android:layout_width="218dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="right"
+
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/finalimage"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
