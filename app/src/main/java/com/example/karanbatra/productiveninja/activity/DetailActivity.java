@@ -1,12 +1,8 @@
 package com.example.karanbatra.productiveninja.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +18,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.karanbatra.productiveninja.R;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +36,6 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        TextView textView = (TextView)findViewById(R.id.name);
-        Intent intent = getIntent();
-        textView.setText(intent.getStringExtra(intent.EXTRA_TEXT));
 
         DisplayMetrics dm=new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -51,7 +43,6 @@ public class DetailActivity extends AppCompatActivity {
         int height=dm.heightPixels;
         getWindow().setLayout((int)(width*(0.6)),(int)(height*.6));
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final List<String> categories = new ArrayList<>();
         categories.add("Social");
@@ -67,7 +58,7 @@ public class DetailActivity extends AppCompatActivity {
         spinner.setAdapter(dataAdapter);
 
         TextView textView = (TextView)findViewById(R.id.name);
-        final Intent intent = getIntent();
+            final Intent intent = getIntent();
 
         textView.setText(intent.getStringExtra(intent.EXTRA_TEXT));
        final List<Contact> contacts = db.getAllContacts();

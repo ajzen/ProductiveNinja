@@ -12,18 +12,9 @@
     tools:context="com.example.karanbatra.productiveninja.activity.Category"
     tools:showIn="@layout/activity_category">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:id="@+id/save_button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/category_listView"
-        android:layout_above="@+id/save_button"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>

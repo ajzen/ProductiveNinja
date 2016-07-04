@@ -25,16 +25,15 @@
         android:layout_height="50dp"
         android:id="@+id/finalimage"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="57dp" />
+        android:layout_alignEnd="@+id/category_list_spinner" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/maxSeconds"
-        android:layout_alignBottom="@+id/finalimage"
-        android:layout_alignEnd="@+id/name"
-        android:hint="enter max seconds" />
+        android:hint="enter max seconds"
+        android:layout_below="@+id/finalimage"
+        android:layout_alignEnd="@+id/savebutton" />
 
     <Button
         android:layout_width="wrap_content"

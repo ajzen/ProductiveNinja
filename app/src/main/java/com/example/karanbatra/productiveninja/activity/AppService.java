@@ -5,7 +5,6 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -67,7 +66,7 @@ public class AppService extends Service {
                     List<Contact> contacts = db.getAllContacts();
                     for(Contact cn : contacts) {
                         if(topPackageName.equals(cn.getName()) && cn.getSeconds() >= cn.getMax_sec()) {
-                            Toast.makeText(AppService.this, "you have exceeded max time for this app \nForce closing app", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AppService.this, "You have exceeded the max time for this app \nForce closing app", Toast.LENGTH_SHORT).show();
                             Intent startHomescreen=new Intent(Intent.ACTION_MAIN);
                             startHomescreen.addCategory(Intent.CATEGORY_HOME);
                             startHomescreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
