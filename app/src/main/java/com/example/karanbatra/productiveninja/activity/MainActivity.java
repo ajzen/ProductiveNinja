@@ -62,14 +62,32 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             editor.putBoolean("firstTime", true);
             editor.commit();
         }
+
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+        drawerFragment = (FragmentDrawer)
+                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        drawerFragment.setDrawerListener(this);
+        displayView(0);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         try {
             PackageManager packageManager = this.getPackageManager();
             ApplicationInfo applicationInfo = packageManager.getApplicationInfo(this.getPackageName(), 0);
             AppOpsManager appOpsManager = (AppOpsManager) this.getSystemService(Context.APP_OPS_SERVICE);
             int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, applicationInfo.uid, applicationInfo.packageName);
-            if (mode == AppOpsManager.MODE_ALLOWED)
-            {
-               // showNotification();
+            if (mode == AppOpsManager.MODE_ALLOWED) {
+                // showNotification();
                 Notification.Builder builder = new Notification.Builder(MainActivity.this);
                 builder.setContentText("App service is running").setContentTitle(
                         MainActivity.this.getString(R.string.app_name));
@@ -89,49 +107,15 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 NotificationManager manager = (NotificationManager) MainActivity.this
                         .getSystemService(Context.NOTIFICATION_SERVICE);
                 manager.notify(NOTIFICATION_ID, notification);
+            } else {
+                Log.e("------", applicationInfo.packageName);
+                cancelNotification(NOTIFICATION_ID);
             }
-            else
-            {
-                Notification.Builder builder = new Notification.Builder(MainActivity.this);
-                builder.setContentText("App service has been stopped").setContentTitle(
-                        MainActivity.this.getString(R.string.app_name));
-                builder.setSmallIcon(R.drawable.ninja);
-                // make the intent object
-                Intent secondActivityIntent = new Intent(MainActivity.this,
-                        MainActivity.class);
-                // pending intent
-                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0,
-                        secondActivityIntent, 0);
-
-                builder.setContentIntent(pendingIntent);
-                Notification notification = builder.build();
-                // this is the main thing to do to make a non removable notification
-                notification.flags |= Notification.FLAG_AUTO_CANCEL;
-                NotificationManager manager = (NotificationManager) MainActivity.this
-                        .getSystemService(Context.NOTIFICATION_SERVICE);
-                manager.notify(NOTIFICATION_ID, notification);
-            }
-            Log.e("------",applicationInfo.packageName);
-                cancelNotification(0);
 
         } catch (PackageManager.NameNotFoundException e) {
-            cancelNotification(0);
+            cancelNotification(NOTIFICATION_ID);
         }
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
-        drawerFragment = (FragmentDrawer)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
-        drawerFragment.setDrawerListener(this);
-        displayView(0);
-
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

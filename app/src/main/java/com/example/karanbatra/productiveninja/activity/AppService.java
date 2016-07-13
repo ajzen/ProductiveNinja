@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Vibrator;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -75,53 +76,24 @@ public class AppService extends Service {
                         if(topPackageName.equals(cn.getName()) && cn.getSeconds() >= cn.getMax_sec()) {
                             ((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(800);
                             Toast.makeText(AppService.this, "You have exceeded the max time for this app \nForce closing app", Toast.LENGTH_SHORT).show();
-
-//                            // opening dialog
-                            final Dialog dialog = new Dialog(this);
-                            dialog.setContentView(R.layout.custom);
-                            dialog.setTitle("Closing app...");
-
-                            // set the custom dialog components - text, image and button
-                            TextView text = (TextView) dialog.findViewById(R.id.namedialog);
-                            text.setText(cn.getName());
-
-//                            ImageView image = (ImageView) dialog.findViewById(R.id.imagedialog);
-//                            image.setImageResource();
-//                            TextView maxi = (TextView) dialog.findViewById(R.id.timedialog);
-//                            maxi.setText(cn.getMax_sec());
-                            Button cancel=(Button)dialog.findViewById(R.id.canceldialog);
-                            cancel.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    dialog.dismiss();
-                                }
-                            });
-
-
-
-                            dialog.show();
-                            //
-
                             Intent startHomescreen=new Intent(Intent.ACTION_MAIN);
                             startHomescreen.addCategory(Intent.CATEGORY_HOME);
                             startHomescreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(startHomescreen);
 
 
-                        }
-                    }
-                    List<Contact> contacts1 = db.getAllContacts();
-                    for (Contact cn : contacts1) {
-                        Log.e(topPackageName.toString(),cn.getName());
-                        if (cn.getName().equals(topPackageName.toString())) {
+                        }else{
                             Log.e(topPackageName.toString(),cn.getName());
-                            if (cn.getSeconds() == 59) {
-                                if (cn.getMinutes() == 59)
-                                    db.updateContact(new Contact(cn.getID(), topPackageName.toString(), 0, 0, cn.getHours() + 1, cn.getCategory(),cn.getMax_sec()));
-                                else
-                                    db.updateContact(new Contact(cn.getID(), topPackageName.toString(), 0, cn.getMinutes() + 1, cn.getHours(), cn.getCategory(),cn.getMax_sec()));
-                            } else
-                                db.updateContact(new Contact(cn.getID(), topPackageName.toString(), cn.getSeconds() + 1, cn.getMinutes(), cn.getHours(), cn.getCategory(),cn.getMax_sec()));
+                            if (cn.getName().equals(topPackageName.toString())) {
+                                Log.e(topPackageName.toString(),cn.getName());
+                                if (cn.getSeconds() == 59) {
+                                    if (cn.getMinutes() == 59)
+                                        db.updateContact(new Contact(cn.getID(), topPackageName.toString(), 0, 0, cn.getHours() + 1, cn.getCategory(),cn.getMax_sec()));
+                                    else
+                                        db.updateContact(new Contact(cn.getID(), topPackageName.toString(), 0, cn.getMinutes() + 1, cn.getHours(), cn.getCategory(),cn.getMax_sec()));
+                                } else
+                                    db.updateContact(new Contact(cn.getID(), topPackageName.toString(), cn.getSeconds() + 1, cn.getMinutes(), cn.getHours(), cn.getCategory(),cn.getMax_sec()));
+                            }
                         }
                     }
                 } else {

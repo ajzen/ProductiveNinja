@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -48,8 +49,8 @@ public class DetailActivity extends AppCompatActivity {
         categories.add("Media");
         categories.add("Communication");
         ArrayAdapter<String> dataAdapter;
-        dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_list_item, categories);
+        dataAdapter.setDropDownViewResource(R.layout.spinner_list_item);
 
         spinner=(Spinner)findViewById(R.id.category_list_spinner);
         spinner.setAdapter(dataAdapter);
@@ -78,6 +79,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
         });
         savebutton.setOnClickListener(new View.OnClickListener() {
             @Override

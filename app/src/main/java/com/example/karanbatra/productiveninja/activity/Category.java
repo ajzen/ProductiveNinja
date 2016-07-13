@@ -49,7 +49,7 @@ public class Category extends AppCompatActivity {
             }
         }
 
-        Collections.sort(myList, new CustomComparator());
+//        Collections.sort(myList, new CustomComparator());
         ListView listView = (ListView) findViewById(R.id.category_listView);
         categoryBaseAdapter = new CategoryBaseAdapter(context, myList);
         listView.setAdapter(categoryBaseAdapter);

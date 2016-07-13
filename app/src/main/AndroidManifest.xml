@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.karanbatra.productiveninja">
-
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -21,7 +20,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -85,16 +83,14 @@
             android:name=".activity.DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/MyMaterialTheme" />
-        <!-- // android:theme="@style/MyMaterialTheme.CustomTheme"> -->
-        <!-- //</activity> -->
         <activity
             android:name=".activity.ExceedingActivity"
             android:label="@string/title_activity_exceeding"
-            android:theme="@style/MyMaterialTheme.CustomTheme"></activity>
-	    <activity>
+            android:theme="@style/MyMaterialTheme.CustomTheme" />
+	    <activity
             android:name=".activity.GamesActivity"
             android:label="@string/title_activity_games"
-            android:theme="@style/MyMaterialTheme"></activity>
+            android:theme="@style/MyMaterialTheme" />
     </application>
 
 </manifest>

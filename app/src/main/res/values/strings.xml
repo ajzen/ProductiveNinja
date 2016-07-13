@@ -5,7 +5,7 @@
     <string name="action_search">Search</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="title_activity_welcome">Home Screen</string>
+    <string name="title_activity_welcome">Productive Ninja</string>
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>
@@ -14,7 +14,6 @@
     <string name="nav_item_analytics">Analytics</string>
 
     <string name="nav_item_notes">Notes</string>
-    <!--<string name="nav_item_home_screen">Add to home screen</string>-->
     <string name="nav_item_send">Send </string>
 
     <!-- navigation drawer item labels  -->
@@ -22,14 +21,12 @@
         <item>@string/nav_item_analytics</item>
 
         <item>@string/nav_item_notes</item>
-        <!--<item>@string/nav_item_add_to_home_screen</item>-->
         <item>@string/nav_item_send</item>
 
 
     </string-array>
 
     <string name="title_notes">Notes</string>
-    <!--<string name="title_home_screen">Add to home screen</string>-->
 
     <string name="title_analytics">Analytics</string>
     <string name="title_send">Send me my stats</string>
@@ -49,16 +46,14 @@
     <string name="slide_4_title">Know your stats</string>
     <string name="slide_4_desc">Get to know your app usage on gmail.</string>
 
-    <string name="title_activity_social">SocialActivity</string>
-    <string name="title_activity_media">MediaActivity</string>
-    <string name="title_activity_communication">CommunicationActivity</string>
+    <string name="title_activity_social">Social</string>
+    <string name="title_activity_media">Media</string>
+    <string name="title_activity_communication">Communication</string>
     <string name="title_activity_category">Category</string>
     <string name="title_activity_category_spinner">CategorySpinner</string>
     <string name="title_activity_create_note">CreateNote</string>
     <string name="title_activity_see_notes">SeeNotes</string>
-    <string name="title_activity_detail">DetailActivity</string>
-    <string name="title_activity_exceeding">ExceedingActivity</string>
-    <string name="title_activity_games">GamesActivity</string>
-    <!--<string name="nav_item_add_to_home_screen">home_screen</string>-->
-
+    <string name="title_activity_detail">Detail</string>
+    <string name="title_activity_exceeding">Exceeding</string>
+    <string name="title_activity_games">Games</string>
 </resources>
