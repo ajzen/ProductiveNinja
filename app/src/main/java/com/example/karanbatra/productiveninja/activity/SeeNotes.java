@@ -47,6 +47,14 @@ public class SeeNotes extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+
+    }
     public void alertMessage(final String name) {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             public void onClick(

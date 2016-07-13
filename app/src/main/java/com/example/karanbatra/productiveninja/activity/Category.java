@@ -19,6 +19,8 @@ import com.example.karanbatra.productiveninja.R;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Category extends AppCompatActivity {
@@ -47,6 +49,8 @@ public class Category extends AppCompatActivity {
                 myList.add(ld);
             }
         }
+
+        Collections.sort(myList, new CustomComparator());
         ListView listView = (ListView) findViewById(R.id.category_listView);
         categoryBaseAdapter = new CategoryBaseAdapter(context, myList);
         listView.setAdapter(categoryBaseAdapter);
@@ -67,4 +71,19 @@ public class Category extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+
+    }
+    public class CustomComparator implements Comparator<CategoryListData> {
+        @Override
+        public int compare(CategoryListData o1, CategoryListData o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    }
+
 }

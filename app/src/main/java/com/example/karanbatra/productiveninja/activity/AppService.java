@@ -1,6 +1,7 @@
 package com.example.karanbatra.productiveninja.activity;
 
 import android.app.AppOpsManager;
+import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.app.usage.UsageStats;
@@ -17,6 +18,9 @@ import android.os.IBinder;
 import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -145,12 +149,41 @@ public class AppService extends Service {
                     List<Contact> contacts = db.getAllContacts();
                     for(Contact cn : contacts) {
                         if(topPackageName.equals(cn.getName()) && cn.getSeconds() >= cn.getMax_sec()) {
+                            ((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(800);
                             Toast.makeText(AppService.this, "You have exceeded the max time for this app \nForce closing app", Toast.LENGTH_SHORT).show();
+
+//                            // opening dialog
+                            final Dialog dialog = new Dialog(this);
+                            dialog.setContentView(R.layout.custom);
+                            dialog.setTitle("Closing app...");
+
+                            // set the custom dialog components - text, image and button
+                            TextView text = (TextView) dialog.findViewById(R.id.namedialog);
+                            text.setText(cn.getName());
+
+//                            ImageView image = (ImageView) dialog.findViewById(R.id.imagedialog);
+//                            image.setImageResource();
+//                            TextView maxi = (TextView) dialog.findViewById(R.id.timedialog);
+//                            maxi.setText(cn.getMax_sec());
+                            Button cancel=(Button)dialog.findViewById(R.id.canceldialog);
+                            cancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                }
+                            });
+
+
+
+                            dialog.show();
+                            //
+
                             Intent startHomescreen=new Intent(Intent.ACTION_MAIN);
                             startHomescreen.addCategory(Intent.CATEGORY_HOME);
                             startHomescreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(startHomescreen);
-                            ((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(800);
+
+
                         }
                     }
                     List<Contact> contacts1 = db.getAllContacts();

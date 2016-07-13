@@ -94,7 +94,14 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
 
+
+    }
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
 

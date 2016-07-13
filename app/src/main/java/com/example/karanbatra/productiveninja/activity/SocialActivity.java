@@ -1,6 +1,7 @@
 package com.example.karanbatra.productiveninja.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -68,6 +69,14 @@ public class SocialActivity extends AppCompatActivity {
         }
         ListView listView = (ListView)findViewById(R.id.listView);
         listView.setAdapter(new MyBaseAdapter(context, myList));
+    }
+    @Override
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+
+
     }
 
 }
