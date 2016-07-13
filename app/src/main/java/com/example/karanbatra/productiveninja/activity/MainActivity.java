@@ -46,30 +46,19 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
     final DBHelper db = new DBHelper(this);
-    public static final String TAG = "MainActivity";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if(!prefs.getBoolean("firstTime", false)) {
-
             addShortcut();
             SharedPreferences.Editor editor = prefs.edit();
             editor.putBoolean("firstTime", true);
             editor.commit();
         }
-        else
-        {
-            Log.e("not for the first time","");
-        }
-        //
-//
-
         try {
             PackageManager packageManager = this.getPackageManager();
             ApplicationInfo applicationInfo = packageManager.getApplicationInfo(this.getPackageName(), 0);
@@ -79,14 +68,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 showNotification();
             else
                 cancelNotification(0);
-            Log.e("------",applicationInfo.packageName);
 
         } catch (PackageManager.NameNotFoundException e) {
             cancelNotification(0);
-            Log.e("","here");
         }
 
-        //
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
@@ -151,7 +137,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 title = getString(R.string.title_analytics);
                 break;
             case 1:
-               // fragment = new WeatherFragment();
                 title = getString(R.string.title_notes);
                 DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
                     public void onClick(
@@ -172,16 +157,12 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 builder.setMessage("create a new note ") .setPositiveButton("create", dialogClickListener) .setNegativeButton("see notes", dialogClickListener).show();
 
                 break;
-            //
-          //  case 2:break;
             case 2:  String body="";
                 List<Contact> contactss = db.getAllContacts();
                 for (Contact cn : contactss) {
                     body+="Name("+cn.getName()+")\t-\tTime spent("+cn.getHours()+":"+cn.getMinutes()+":"+cn.getSeconds()+")"+"\ttime limit("+cn.getMax_sec()+")\n";
-
-
                 }
-                generateNoteOnSD(MainActivity.this,"Ninja Stats",body);
+                generateNoteOnSD(MainActivity.this,"Phone Statistics",body);
                 break;
             default:
                 break;
@@ -215,10 +196,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 .setSmallIcon(R.drawable.ninja)
                 .setContentIntent(pIntent)
                 .setSound(soundUri)
-
-
-//                .addAction(R.drawable.ninja, "View", pIntent)
-//                .addAction(0, "Remind", pIntent)
 
                 .build();
 
@@ -272,15 +249,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             writer.append(sBody);
             writer.flush();
             writer.close();
-            //  Toast.makeText(context, "Saved at "+writer+"gpxfile is "+gpxfile, Toast.LENGTH_SHORT).show();
-           // Log.e("","\"Saved at \"+writer+\"gpxfile is \"+gpxfile");
-            // for sending
             ConnectivityManager cm =
                     (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo netInfo = cm.getActiveNetworkInfo();
             if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-
-
                 // run your one time code
                 AccountManager am = AccountManager.get(this);
                 Account[] accounts = am.getAccounts();
@@ -291,9 +263,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                     // Take your time to look at all available accounts
                     System.out.println("Accounts : " + acname + ", " + actype);
                     if (actype.equals("com.google")) {
-                        //  Toast.makeText(MainActivity.this, ""+acname, Toast.LENGTH_SHORT).show();
                         Toast.makeText(MainActivity.this, acname, Toast.LENGTH_SHORT).show();
-                        SendMail sm = new SendMail(this, acname, "words file", "We wish you will utilize this applicaion to the fullest\nfor any queries \n\t Neeraj Varshney (nvarshney97@gmail.com)",gpxfile.toString());
+                        SendMail sm = new SendMail(this, acname, "Productive Ninja Statistics", "We wish you will utilize this applicaion to the fullest\nfor any queries \n\t Neeraj Varshney (nvarshney97@gmail.com)",gpxfile.toString());
                         Log.e("",acname);
                         sm.execute();
 
@@ -301,18 +272,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                         break;
 
                     }
-                    //if(actype.equals("com.whatsapp")){
-                    //   String phoneNumber = ac.name;
-                    //   Toast.makeText(MainActivity.this, ""+phoneNumber, Toast.LENGTH_SHORT).show();
-                    //}
                 }
             }
-            else
-            {
+            else{
                 Toast.makeText(MainActivity.this, "not connected to internet", Toast.LENGTH_SHORT).show();
-               // Log.e("not sent error here","");
             }
-            //
         } catch (IOException e) {
             e.printStackTrace();
         }

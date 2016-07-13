@@ -1,8 +1,6 @@
 package com.example.karanbatra.productiveninja.activity;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.karanbatra.productiveninja.R;
@@ -23,11 +20,11 @@ public class AnalyticsFragment extends Fragment {
     TextView social;
     TextView communication;
     TextView media;
+    TextView games;
     Button btnSocial;
     Button btnMedia;
     Button btnComm;
-    ImageView notesview;
-
+    Button btnGames;
     public AnalyticsFragment() {
         // Required empty public constructor
 
@@ -44,15 +41,7 @@ public class AnalyticsFragment extends Fragment {
         social = (TextView) rootView.findViewById(R.id.social_textview_value);
         media = (TextView) rootView.findViewById(R.id.media_textview_value);
         communication = (TextView) rootView.findViewById(R.id.communication_textview_value);
-        notesview=(ImageView) rootView.findViewById(R.id.notesid);
-        notesview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                alertMessage();
-            }
-        });
-
+        games = (TextView)rootView.findViewById(R.id.games_textview_value);
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -68,6 +57,9 @@ public class AnalyticsFragment extends Fragment {
         int comm_hours=0;
         int comm_minutes=0;
         int comm_seconds=0;
+        int games_hours = 0;
+        int games_minutes = 0;
+        int games_seconds = 0;
         super.onResume();
         DBHelper db = new DBHelper(getContext());
         List<Contact> list = db.getCategoryContacts("Social");
@@ -107,6 +99,18 @@ public class AnalyticsFragment extends Fragment {
         }
         communication.setText(comm_hours+":"+comm_minutes+":"+comm_seconds);
 
+        List<Contact> list_games = db.getCategoryContacts("Games");
+        for(int i = 0;i < list_games.size(); i++){
+            games_hours+=list_games.get(i).getHours();
+            games_minutes+=list_games.get(i).getMinutes();
+            games_seconds+=list_games.get(i).getSeconds();
+            if(games_seconds > 59){
+                games_minutes+=1;
+                games_seconds=0;
+            }
+        }
+        games.setText(games_hours+":"+games_minutes+":"+games_seconds);
+
         btnSocial = (Button)rootView.findViewById(R.id.social_button);
         btnSocial.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,28 +135,15 @@ public class AnalyticsFragment extends Fragment {
                 startActivity(new Intent(getActivity(), CommunicationActivity.class));
             }
         });
-    }
-    public void alertMessage() {
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            public void onClick(
-                    DialogInterface dialog, int which) {
-                switch (which) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        Intent intent=new Intent(getActivity(), CreateNote.class);
-                        startActivity(intent);
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
-                        Intent intents=new Intent(getActivity(), SeeNotes.class);
-                        startActivity(intents);
-                        break;
-                }
+
+        btnGames = (Button)rootView.findViewById(R.id.games_button);
+        btnGames.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), GamesActivity.class));
             }
-        };
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("create a new note ") .setPositiveButton("create", dialogClickListener) .setNegativeButton("see notes", dialogClickListener).show();
-
+        });
     }
-
 
     @Override
     public void onAttach(Activity activity) {

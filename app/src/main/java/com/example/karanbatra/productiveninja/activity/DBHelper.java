@@ -128,10 +128,8 @@ class DBHelper extends SQLiteOpenHelper {
                     contact.setHours(cursor.getInt(4));
                     contact.setCategory(cursor.getString(5));
                     contact.setMax_sec(cursor.getInt(6));
-
                 }
             } while (cursor.moveToNext());
-
         }
         return contact;
 

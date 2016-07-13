@@ -17,9 +17,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class SocialActivity extends AppCompatActivity {
+public class GamesActivity extends AppCompatActivity {
     ArrayList<ListData> myList = new ArrayList<>();
-    Context context = SocialActivity.this;
+    Context context = GamesActivity.this;
     HashSet<String> present = new HashSet<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class SocialActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         try{
             DBHelper db = new DBHelper(this);
-            List<Contact> list = db.getCategoryContacts("Social");
+            List<Contact> list = db.getCategoryContacts("Games");
             for(int i = 0;i < list.size(); i++) {
                 if (!present.contains(list.get(i).getName())) {
                     ApplicationInfo app = getPackageManager().getApplicationInfo(list.get(i).getName(), 0);
