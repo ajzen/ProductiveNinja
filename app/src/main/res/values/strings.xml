@@ -15,7 +15,7 @@
 
     <string name="nav_item_notes">Notes</string>
     <!--<string name="nav_item_home_screen">Add to home screen</string>-->
-    <string name="nav_item_send">Send</string>
+    <string name="nav_item_send">Send </string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -58,6 +58,7 @@
     <string name="title_activity_see_notes">SeeNotes</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_exceeding">ExceedingActivity</string>
+    <string name="title_activity_games">GamesActivity</string>
     <!--<string name="nav_item_add_to_home_screen">home_screen</string>-->
 
 </resources>

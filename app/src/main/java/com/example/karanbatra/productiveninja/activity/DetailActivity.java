@@ -6,8 +6,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.karanbatra.productiveninja.R;
 
@@ -37,20 +34,19 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        final Intent intent = getIntent();
 
-//        DisplayMetrics dm=new DisplayMetrics();
-//        getWindowManager().getDefaultDisplay().getMetrics(dm);
-//        int width=dm.widthPixels;
-//        int height=dm.heightPixels;
-//        getWindow().setLayout((int)(width*(0.6)),(int)(height*.6));
-
-     //   setSupportActionBar(toolbar);
+        max_sec = (EditText) findViewById(R.id.maxSeconds);
+        Contact cn = db.getContact(intent.getStringExtra("packagename"));
+        if (cn != null) {
+            Integer seconds = cn.getMax_sec();
+            max_sec.setText(seconds.toString());
+        }
         final List<String> categories = new ArrayList<>();
         categories.add("Social");
         categories.add("Games");
         categories.add("Media");
         categories.add("Communication");
-        categories.add("Other");
         ArrayAdapter<String> dataAdapter;
         dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -59,10 +55,7 @@ public class DetailActivity extends AppCompatActivity {
         spinner.setAdapter(dataAdapter);
 
         TextView textView = (TextView)findViewById(R.id.name);
-            final Intent intent = getIntent();
-
         textView.setText(intent.getStringExtra(intent.EXTRA_TEXT));
-       final List<Contact> contacts = db.getAllContacts();
         savebutton=(Button)findViewById(R.id.savebutton);
         finalimage=(ImageView)findViewById(R.id.finalimage);
         byte[] byteArray = getIntent().getByteArrayExtra("image");
@@ -71,7 +64,6 @@ public class DetailActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
           @Override
           public void onItemSelected(AdapterView<?> parent, View view, int p, long id) {
-              Log.e("p is ", "" + p);
               if (p == 0) {
                   category = "Social";
               } else if (p == 1) {
@@ -80,8 +72,6 @@ public class DetailActivity extends AppCompatActivity {
                   category = "Media";
               } else if (p == 3) {
                   category = "Communication";
-              } else {
-                  category = "Other";
               }
           }
             @Override
@@ -92,30 +82,22 @@ public class DetailActivity extends AppCompatActivity {
         savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 max_sec = (EditText) findViewById(R.id.maxSeconds);
                 int maxi = Integer.MAX_VALUE;
-
                 Contact cn = db.getContact(intent.getStringExtra("packagename"));
                 if (cn != null) {
-                  //  db.updateContact(new Contact(intent.getStringExtra("packagename"), cn.getSeconds(), cn.getMinutes(), cn.getHours(), category, Integer.parseInt(max_sec.getText().toString())));
-                   db.deleteContact(cn);
+                    db.deleteContact(cn);
                     db.addContact(new Contact(intent.getStringExtra("packagename"), cn.getSeconds(), cn.getMinutes(), cn.getHours(), category, Integer.parseInt(max_sec.getText().toString())));
                     Intent ints = new Intent(DetailActivity.this, MainActivity.class);
                     startActivity(ints);
-
-                    Log.e("-------",cn.getName());
-                    Log.e("",category);
                 }
-                    else {
-                    if (max_sec.toString().compareTo("") == 0) {
-                        Toast.makeText(DetailActivity.this, "Please enter in the field", Toast.LENGTH_SHORT).show();
-                        db.addContact(new Contact(intent.getStringExtra("packagename"), 0, 0, 0, category, maxi));
+                else {
+                    try{
+                        db.addContact(new Contact(intent.getStringExtra("packagename"), 0, 0, 0, category, Integer.parseInt(max_sec.getText().toString())));
                         Intent ints = new Intent(DetailActivity.this, MainActivity.class);
                         startActivity(ints);
-                    } else {
-                        db.addContact(new Contact(intent.getStringExtra("packagename"), 0, 0, 0, category, Integer.parseInt(max_sec.getText().toString())));
+                    }catch(java.lang.NumberFormatException e) {
+                        db.addContact(new Contact(intent.getStringExtra("packagename"), 0, 0, 0, category, maxi));
                         Intent ints = new Intent(DetailActivity.this, MainActivity.class);
                         startActivity(ints);
                     }

@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -59,14 +58,12 @@ public class Category extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 CategoryListData cld = myList.get(position);
-                Log.e(cld.getName(),"Karan");
                 Intent intent = new Intent(getBaseContext(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, cld.getName());
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 cld.getImgBitMap().compress(Bitmap.CompressFormat.PNG, 100, stream);
                 byte[] byteArray = stream.toByteArray();
                 intent.putExtra("image",byteArray);
                 intent.putExtra("packagename", packageNames.get(position));
-
                 startActivity(intent);
             }
         });
