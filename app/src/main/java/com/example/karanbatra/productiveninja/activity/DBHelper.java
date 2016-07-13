@@ -112,7 +112,30 @@ class DBHelper extends SQLiteOpenHelper {
                 new String[] { String.valueOf(contact.getID()) });
         db.close();
     }
+    Contact getContact(String name) {
+        Contact contact = null;
+        String selectQuery = "SELECT  * FROM " + TABLE;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                if (cursor.getString(1).equals(name)) {
+                    contact=new Contact();
+                    contact.setID(Integer.parseInt(cursor.getString(0)));
+                    contact.setName(cursor.getString(1));
+                    contact.setSeconds(cursor.getInt(2));
+                    contact.setMinutes(cursor.getInt(3));
+                    contact.setHours(cursor.getInt(4));
+                    contact.setCategory(cursor.getString(5));
+                    contact.setMax_sec(cursor.getInt(6));
 
+                }
+            } while (cursor.moveToNext());
+
+        }
+        return contact;
+
+    }
     public List<Contact> getCategoryContacts(String category) {
         List<Contact> contactList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE;

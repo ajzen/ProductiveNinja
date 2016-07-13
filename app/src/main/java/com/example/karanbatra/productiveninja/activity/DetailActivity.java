@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.karanbatra.productiveninja.R;
 
@@ -37,13 +38,13 @@ public class DetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DisplayMetrics dm=new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int width=dm.widthPixels;
-        int height=dm.heightPixels;
-        getWindow().setLayout((int)(width*(0.6)),(int)(height*.6));
+//        DisplayMetrics dm=new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        int width=dm.widthPixels;
+//        int height=dm.heightPixels;
+//        getWindow().setLayout((int)(width*(0.6)),(int)(height*.6));
 
-        setSupportActionBar(toolbar);
+     //   setSupportActionBar(toolbar);
         final List<String> categories = new ArrayList<>();
         categories.add("Social");
         categories.add("Games");
@@ -91,9 +92,34 @@ public class DetailActivity extends AppCompatActivity {
         savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                max_sec=(EditText)findViewById(R.id.maxSeconds);
-                db.addContact(new Contact(intent.getStringExtra("packagename"), 0, 0, 0, category,Integer.parseInt(max_sec.getText().toString())));
 
+
+                max_sec = (EditText) findViewById(R.id.maxSeconds);
+                int maxi = Integer.MAX_VALUE;
+
+                Contact cn = db.getContact(intent.getStringExtra("packagename"));
+                if (cn != null) {
+                  //  db.updateContact(new Contact(intent.getStringExtra("packagename"), cn.getSeconds(), cn.getMinutes(), cn.getHours(), category, Integer.parseInt(max_sec.getText().toString())));
+                   db.deleteContact(cn);
+                    db.addContact(new Contact(intent.getStringExtra("packagename"), cn.getSeconds(), cn.getMinutes(), cn.getHours(), category, Integer.parseInt(max_sec.getText().toString())));
+                    Intent ints = new Intent(DetailActivity.this, MainActivity.class);
+                    startActivity(ints);
+
+                    Log.e("-------",cn.getName());
+                    Log.e("",category);
+                }
+                    else {
+                    if (max_sec.toString().compareTo("") == 0) {
+                        Toast.makeText(DetailActivity.this, "Please enter in the field", Toast.LENGTH_SHORT).show();
+                        db.addContact(new Contact(intent.getStringExtra("packagename"), 0, 0, 0, category, maxi));
+                        Intent ints = new Intent(DetailActivity.this, MainActivity.class);
+                        startActivity(ints);
+                    } else {
+                        db.addContact(new Contact(intent.getStringExtra("packagename"), 0, 0, 0, category, Integer.parseInt(max_sec.getText().toString())));
+                        Intent ints = new Intent(DetailActivity.this, MainActivity.class);
+                        startActivity(ints);
+                    }
+                }
             }
         });
     }

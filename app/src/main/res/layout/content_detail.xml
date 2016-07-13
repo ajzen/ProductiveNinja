@@ -32,8 +32,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/maxSeconds"
         android:hint="enter max seconds"
-        android:layout_below="@+id/finalimage"
-        android:layout_alignEnd="@+id/savebutton" />
+        android:layout_above="@+id/category_list_spinner"
+        android:layout_alignStart="@+id/category_list_spinner"
+        android:layout_marginBottom="44dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -41,16 +42,15 @@
         android:text="save"
         android:id="@+id/savebutton"
 
-        android:layout_marginTop="28dp"
-        android:layout_below="@+id/category_list_spinner"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/maxSeconds"
+        android:layout_marginBottom="215dp" />
     <Spinner
     android:id="@+id/category_list_spinner"
     android:layout_width="218dp"
     android:layout_height="wrap_content"
     android:layout_gravity="right"
 
-        android:layout_marginTop="43dp"
-        android:layout_below="@+id/finalimage"
+        android:layout_above="@+id/savebutton"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

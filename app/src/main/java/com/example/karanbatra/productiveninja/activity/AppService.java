@@ -1,19 +1,41 @@
 package com.example.karanbatra.productiveninja.activity;
 
+import android.app.AppOpsManager;
+import android.app.NotificationManager;
 import android.app.Service;
 import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Vibrator;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+
+import com.example.karanbatra.productiveninja.R;
+
 
 public class AppService extends Service {
     Handler mHandler;
@@ -34,12 +56,27 @@ public class AppService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         millis = System.currentTimeMillis() / 1000;
-
+//        try {
+//            PackageManager packageManager = this.getPackageManager();
+//            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(this.getPackageName(), 0);
+//            AppOpsManager appOpsManager = (AppOpsManager) this.getSystemService(Context.APP_OPS_SERVICE);
+//            int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, applicationInfo.uid, applicationInfo.packageName);
+//            if (mode == AppOpsManager.MODE_ALLOWED)
+//                showNotification();
+//            else
+//                cancelNotification(0);
+//        Log.e("------",applicationInfo.packageName);
+//
+//        } catch (PackageManager.NameNotFoundException e) {
+//          cancelNotification(0);
+//            Log.e("","here");
+//        }
         mHandler = new Handler();
         mRunnable = new Runnable() {
             @Override
             public void run() {
                 mHandler.postDelayed(mRunnable, 1000);
+
                 getTopActivtyFromLolipopOnwards();
             }
         };
@@ -47,6 +84,48 @@ public class AppService extends Service {
         return Service.START_STICKY;
     }
 
+
+    public void showNotification(){
+
+        // define sound URI, the sound to be played when there's a notification
+        Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        // intent triggered, you can add other intent for other actions
+        Intent intent = new Intent(AppService.this, AppService.class);
+        PendingIntent pIntent = PendingIntent.getActivity(AppService.this, 0, intent, 0);
+
+        // this is it, we'll build the notification!
+        // in the addAction method, if you don't want any icon, just set the first param to 0
+        Notification mNotification = new Notification.Builder(this)
+
+                .setContentTitle("App service running!")
+                .setContentText("Here's an awesome update for you!")
+                .setSmallIcon(R.drawable.ninja)
+                .setContentIntent(pIntent)
+                .setSound(soundUri)
+
+
+                .addAction(R.drawable.ninja, "View", pIntent)
+                .addAction(0, "Remind", pIntent)
+
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        // If you want to hide the notification after it was selected, do the code below
+        // myNotification.flags |= Notification.FLAG_AUTO_CANCEL;
+
+        notificationManager.notify(0, mNotification);
+    }
+
+    public void cancelNotification(int notificationId){
+
+        if (Context.NOTIFICATION_SERVICE!=null) {
+            String ns = Context.NOTIFICATION_SERVICE;
+            NotificationManager nMgr = (NotificationManager) getApplicationContext().getSystemService(ns);
+            nMgr.cancel(notificationId);
+        }
+    }
 
     public void getTopActivtyFromLolipopOnwards() {
         String topPackageName;
@@ -71,6 +150,7 @@ public class AppService extends Service {
                             startHomescreen.addCategory(Intent.CATEGORY_HOME);
                             startHomescreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(startHomescreen);
+                            ((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(800);
                         }
                     }
                     List<Contact> contacts1 = db.getAllContacts();
