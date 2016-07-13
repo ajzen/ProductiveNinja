@@ -43,7 +43,13 @@
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_welcome"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/MyMaterialTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+
+            </intent-filter>
+            </activity>
 
         <service
             android:name=".activity.AppService"
@@ -82,6 +88,10 @@
         <!-- // android:theme="@style/MyMaterialTheme.CustomTheme"> -->
         <!-- //</activity> -->
         <activity
+            android:name=".activity.ExceedingActivity"
+            android:label="@string/title_activity_exceeding"
+            android:theme="@style/MyMaterialTheme.CustomTheme"></activity>
+	    <activity>
             android:name=".activity.GamesActivity"
             android:label="@string/title_activity_games"
             android:theme="@style/MyMaterialTheme"></activity>

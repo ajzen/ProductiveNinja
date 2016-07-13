@@ -57,6 +57,7 @@
     <string name="title_activity_create_note">CreateNote</string>
     <string name="title_activity_see_notes">SeeNotes</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_exceeding">ExceedingActivity</string>
     <string name="title_activity_games">GamesActivity</string>
     <!--<string name="nav_item_add_to_home_screen">home_screen</string>-->
 

@@ -25,6 +25,7 @@ import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
     final DBHelper db = new DBHelper(this);
+    public static final String TAG = "MainActivity";
+    final int NOTIFICATION_ID = 1;
 
 
     @Override
@@ -65,8 +68,50 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             AppOpsManager appOpsManager = (AppOpsManager) this.getSystemService(Context.APP_OPS_SERVICE);
             int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, applicationInfo.uid, applicationInfo.packageName);
             if (mode == AppOpsManager.MODE_ALLOWED)
-                showNotification();
+            {
+               // showNotification();
+                Notification.Builder builder = new Notification.Builder(MainActivity.this);
+                builder.setContentText("App service is running").setContentTitle(
+                        MainActivity.this.getString(R.string.app_name));
+                builder.setSmallIcon(R.drawable.ninja);
+                // make the intent object
+                Intent secondActivityIntent = new Intent(MainActivity.this,
+                        MainActivity.class);
+                // pending intent
+                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0,
+                        secondActivityIntent, 0);
+
+                builder.setContentIntent(pendingIntent);
+                builder.setAutoCancel(false);
+                Notification notification = builder.build();
+                // this is the main thing to do to make a non removable notification
+                notification.flags |= Notification.FLAG_NO_CLEAR;
+                NotificationManager manager = (NotificationManager) MainActivity.this
+                        .getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.notify(NOTIFICATION_ID, notification);
+            }
             else
+            {
+                Notification.Builder builder = new Notification.Builder(MainActivity.this);
+                builder.setContentText("App service has been stopped").setContentTitle(
+                        MainActivity.this.getString(R.string.app_name));
+                builder.setSmallIcon(R.drawable.ninja);
+                // make the intent object
+                Intent secondActivityIntent = new Intent(MainActivity.this,
+                        MainActivity.class);
+                // pending intent
+                PendingIntent pendingIntent = PendingIntent.getActivity(MainActivity.this, 0,
+                        secondActivityIntent, 0);
+
+                builder.setContentIntent(pendingIntent);
+                Notification notification = builder.build();
+                // this is the main thing to do to make a non removable notification
+                notification.flags |= Notification.FLAG_AUTO_CANCEL;
+                NotificationManager manager = (NotificationManager) MainActivity.this
+                        .getSystemService(Context.NOTIFICATION_SERVICE);
+                manager.notify(NOTIFICATION_ID, notification);
+            }
+            Log.e("------",applicationInfo.packageName);
                 cancelNotification(0);
 
         } catch (PackageManager.NameNotFoundException e) {
@@ -177,7 +222,19 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             getSupportActionBar().setTitle(title);
         }
     }
-
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//***Change Here***
+            startActivity(intent);
+            finish();
+        }
+    }
     public void showNotification(){
 
         // define sound URI, the sound to be played when there's a notification
