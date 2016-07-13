@@ -149,7 +149,9 @@ public class AnalyticsFragment extends Fragment {
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("create a new note ") .setPositiveButton("create", dialogClickListener) .setNegativeButton("see notes", dialogClickListener).show(); }
+        builder.setMessage("create a new note ") .setPositiveButton("create", dialogClickListener) .setNegativeButton("see notes", dialogClickListener).show();
+
+    }
 
 
     @Override
