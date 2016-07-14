@@ -78,7 +78,7 @@ public class AppService extends Service {
                     for(Contact cn : contacts) {
                         if(topPackageName.equals(cn.getName()) && (cn.getSeconds()+60*cn.getMinutes()) >= cn.getMax_sec()) {
                             ((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(800);
-                            Toast.makeText(AppService.this, "You have exceeded the max time for this app \nForce closing app", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AppService.this, "You have exceeded the time limit for this application.", Toast.LENGTH_SHORT).show();
                             Intent startHomescreen=new Intent(Intent.ACTION_MAIN);
                             startHomescreen.addCategory(Intent.CATEGORY_HOME);
                             startHomescreen.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                             case DialogInterface.BUTTON_POSITIVE:
                                 Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
                                 startActivity(intent);
+                                startService(new Intent(MainActivity.this, AppService.class));
                                 break;
                             case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
 //                                Intent intents=new Intent(MainActivity.this, MainActivity.class);

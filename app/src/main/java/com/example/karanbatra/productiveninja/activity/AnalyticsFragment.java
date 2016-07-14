@@ -52,9 +52,6 @@ public class AnalyticsFragment extends Fragment implements Animation.AnimationLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_analytics, container, false);
 
-
-
-
         social = (TextView) rootView.findViewById(R.id.social_textview_value);
         media = (TextView) rootView.findViewById(R.id.media_textview_value);
         communication = (TextView) rootView.findViewById(R.id.communication_textview_value);
@@ -101,8 +98,9 @@ public class AnalyticsFragment extends Fragment implements Animation.AnimationLi
             social_minutes+=list.get(i).getMinutes();
             social_seconds+=list.get(i).getSeconds();
             if(social_seconds > 59){
-                social_minutes+=1;
-                social_seconds=0;
+                int factor = social_seconds/60;
+                social_minutes+=factor;
+                social_seconds=social_seconds-60*factor;
             }
         }
         social.setText(social_hours+":"+social_minutes+":"+social_seconds);
@@ -114,8 +112,9 @@ public class AnalyticsFragment extends Fragment implements Animation.AnimationLi
             media_minutes+=list_media.get(i).getMinutes();
             media_seconds+=list_media.get(i).getSeconds();
             if(media_seconds > 59){
-                media_minutes+=1;
-                media_seconds=0;
+                int factor = media_seconds/60;
+                media_minutes+=factor;
+                media_seconds=media_seconds-60*factor;
             }
         }
         media.setText(media_hours+":"+media_minutes+":"+media_seconds);
@@ -126,8 +125,9 @@ public class AnalyticsFragment extends Fragment implements Animation.AnimationLi
             comm_minutes+=list_comm.get(i).getMinutes();
             comm_seconds+=list_comm.get(i).getSeconds();
             if(comm_seconds > 59){
-                comm_minutes+=1;
-                comm_seconds=0;
+                int factor = comm_seconds/60;
+                comm_minutes+=factor;
+                comm_seconds=comm_seconds-60*factor;
             }
         }
         communication.setText(comm_hours+":"+comm_minutes+":"+comm_seconds);
@@ -138,8 +138,9 @@ public class AnalyticsFragment extends Fragment implements Animation.AnimationLi
             games_minutes+=list_games.get(i).getMinutes();
             games_seconds+=list_games.get(i).getSeconds();
             if(games_seconds > 59){
-                games_minutes+=1;
-                games_seconds=0;
+                int factor = comm_seconds/60;
+                games_minutes+=factor;
+                games_seconds=games_seconds-60*factor;
             }
         }
         games.setText(games_hours+":"+games_minutes+":"+games_seconds);
