@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
         if(!prefs.getBoolean("firstTime", false)) {
             addShortcut();
             SharedPreferences.Editor editor = prefs.edit();
@@ -68,6 +69,37 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+        try {
+            PackageManager packageManager = this.getPackageManager();
+            ApplicationInfo applicationInfo = packageManager.getApplicationInfo(this.getPackageName(), 0);
+            AppOpsManager appOpsManager = (AppOpsManager) this.getSystemService(Context.APP_OPS_SERVICE);
+            int mode = appOpsManager.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, applicationInfo.uid, applicationInfo.packageName);
+            if (mode != AppOpsManager.MODE_ALLOWED) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    public void onClick(
+                            DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
+                                startActivity(intent);
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
+//                                Intent intents=new Intent(MainActivity.this, MainActivity.class);
+//                                startActivity(intents);
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("Allow usage permission") .setPositiveButton("Permit", dialogClickListener) .setNegativeButton("Cancel", dialogClickListener).show();
+            } else {
+            }
+
+        } catch (PackageManager.NameNotFoundException e) {
+//            cancelNotification(NOTIFICATION_ID);
+        }
 
 
         drawerFragment = (FragmentDrawer)
