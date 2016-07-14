@@ -2,6 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="#ff0c35"
+    android:textColor="#407c81"
     android:padding="10dp"
-    />
+    android:textStyle="bold" />

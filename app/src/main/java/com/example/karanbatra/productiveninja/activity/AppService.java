@@ -8,6 +8,7 @@ import android.app.usage.UsageStats;
 import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.karanbatra.productiveninja.R;
 
 import java.util.List;
 import java.util.SortedMap;
@@ -73,7 +76,7 @@ public class AppService extends Service {
 
                     List<Contact> contacts = db.getAllContacts();
                     for(Contact cn : contacts) {
-                        if(topPackageName.equals(cn.getName()) && cn.getSeconds() >= cn.getMax_sec()) {
+                        if(topPackageName.equals(cn.getName()) && (cn.getSeconds()+60*cn.getMinutes()) >= cn.getMax_sec()) {
                             ((Vibrator)getSystemService(VIBRATOR_SERVICE)).vibrate(800);
                             Toast.makeText(AppService.this, "You have exceeded the max time for this app \nForce closing app", Toast.LENGTH_SHORT).show();
                             Intent startHomescreen=new Intent(Intent.ACTION_MAIN);

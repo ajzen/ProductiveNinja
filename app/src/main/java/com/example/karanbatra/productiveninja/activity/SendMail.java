@@ -30,8 +30,8 @@ import javax.mail.internet.MimeMultipart;
 
 
 class Config {
-    public static final String EMAIL ="nrjvarshney.testing@gmail.com";
-    public static final String PASSWORD ="mynewpassword123";
+    public static final String EMAIL ="productiveninja16@gmail.com";
+    public static final String PASSWORD ="ninja1234";
 }
 
 //Class is extending AsyncTask because this class is going to perform a networking operation
@@ -123,7 +123,7 @@ public class SendMail extends AsyncTask<Void,Void,Void> {
                 BodyPart messageBodyPart = new MimeBodyPart();
 
                 // Now set the actual message
-                messageBodyPart.setText("This is message body");
+                messageBodyPart.setText("Productive Ninja stats.");
 
                 // Create a multipar message
                 Multipart multipart = new MimeMultipart();

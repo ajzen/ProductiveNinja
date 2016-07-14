@@ -97,7 +97,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Communication"
+        android:text="Comm ."
         android:id="@+id/communication_button"
         android:layout_marginStart="34dp"
         android:layout_centerVertical="true"
@@ -110,7 +110,7 @@
         android:id="@+id/games_button"
         android:layout_below="@+id/tableLayout"
         android:layout_toEndOf="@+id/communication_button"
-        android:layout_marginStart="54dp" />
+        android:layout_marginStart="97dp" />
 
     <TextView
         android:id="@+id/games_textview_value"
@@ -124,6 +124,30 @@
         android:layout_alignTop="@+id/communication_textview_value"
         android:layout_alignEnd="@+id/games_button" />
 
+
+
+        <ImageView
+
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/bonus"
+            android:src="@drawable/finefin"
+            android:layout_below="@+id/fivetext"
+            android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="grant me 5 minutes"
+        android:id="@+id/fivetext"
+        android:textColor="#FFF"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:textSize="23dp"
+        android:layout_below="@+id/communication_textview_value"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp" />
 
 
 </RelativeLayout>

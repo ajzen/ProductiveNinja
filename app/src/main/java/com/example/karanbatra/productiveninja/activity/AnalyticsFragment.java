@@ -7,15 +7,19 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.karanbatra.productiveninja.R;
 
 import java.util.List;
 
 
-public class AnalyticsFragment extends Fragment {
+public class AnalyticsFragment extends Fragment implements Animation.AnimationListener  {
     View rootView;
     TextView social;
     TextView communication;
@@ -25,6 +29,9 @@ public class AnalyticsFragment extends Fragment {
     Button btnMedia;
     Button btnComm;
     Button btnGames;
+    ImageView bonus;
+    TextView fivetext;
+    Animation animFadein;
     public AnalyticsFragment() {
         // Required empty public constructor
 
@@ -42,6 +49,22 @@ public class AnalyticsFragment extends Fragment {
         media = (TextView) rootView.findViewById(R.id.media_textview_value);
         communication = (TextView) rootView.findViewById(R.id.communication_textview_value);
         games = (TextView)rootView.findViewById(R.id.games_textview_value);
+        fivetext=(TextView)rootView.findViewById(R.id.fivetext);
+        bonus=(ImageView)rootView.findViewById(R.id.bonus);
+        bonus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 DBHelper db = new DBHelper(getContext());
+                List<Contact> contacts = db.getAllContacts();
+                for(Contact cn : contacts) {
+                    db.updateContact(new Contact(cn.getID(), cn.getName(), cn.getSeconds(), cn.getMinutes(), cn.getHours() , cn.getCategory(),cn.getMax_sec()+5));
+                    bonus.startAnimation(animFadein);
+                }
+            }
+        });
+        animFadein = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),
+                R.anim.rotate);
+        animFadein.setAnimationListener(this);
         // Inflate the layout for this fragment
         return rootView;
     }
@@ -153,5 +176,21 @@ public class AnalyticsFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+
     }
 }

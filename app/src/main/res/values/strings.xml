@@ -26,7 +26,7 @@
 
     </string-array>
 
-    <string name="title_notes">Notes</string>
+    <string name="title_notes">Reminders</string>
 
     <string name="title_analytics">Analytics</string>
     <string name="title_send">Send me my stats</string>
@@ -51,8 +51,8 @@
     <string name="title_activity_communication">Communication</string>
     <string name="title_activity_category">Category</string>
     <string name="title_activity_category_spinner">CategorySpinner</string>
-    <string name="title_activity_create_note">CreateNote</string>
-    <string name="title_activity_see_notes">SeeNotes</string>
+    <string name="title_activity_create_note">Add Task</string>
+    <string name="title_activity_see_notes">Scheduled Tasks</string>
     <string name="title_activity_detail">Detail</string>
     <string name="title_activity_exceeding">Exceeding</string>
     <string name="title_activity_games">Games</string>

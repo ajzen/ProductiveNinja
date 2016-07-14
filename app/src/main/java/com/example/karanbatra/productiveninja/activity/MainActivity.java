@@ -186,12 +186,31 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 builder.setMessage("create a new note ") .setPositiveButton("create", dialogClickListener) .setNegativeButton("see notes", dialogClickListener).show();
 
                 break;
-            case 2:  String body="";
-                List<Contact> contactss = db.getAllContacts();
-                for (Contact cn : contactss) {
-                    body+="Name("+cn.getName()+")\t-\tTime spent("+cn.getHours()+":"+cn.getMinutes()+":"+cn.getSeconds()+")"+"\ttime limit("+cn.getMax_sec()+")\n";
-                }
-                generateNoteOnSD(MainActivity.this,"Phone Statistics",body);
+            case 2:
+
+                DialogInterface.OnClickListener dialogClickListeners = new DialogInterface.OnClickListener() {
+                    public void onClick(
+                            DialogInterface dialog, int which) {
+                        switch (which) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                String body="";
+                                List<Contact> contactss = db.getAllContacts();
+                                for (Contact cn : contactss) {
+                                    body+="Name("+cn.getName()+")\t-\tTime spent("+cn.getHours()+":"+cn.getMinutes()+":"+cn.getSeconds()+")"+"\ttime limit("+cn.getMax_sec()+")\n";
+                                }
+                                generateNoteOnSD(MainActivity.this,"Productive Ninja-An app to keep yourself on track",body);
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE: // No button clicked // do nothing
+                                Intent intents=new Intent(MainActivity.this, MainActivity.class);
+                                startActivity(intents);
+                                break;
+                        }
+                    }
+                };
+                AlertDialog.Builder builders = new AlertDialog.Builder(MainActivity.this);
+                builders.setMessage("Confirm send ") .setPositiveButton("Send", dialogClickListeners) .setNegativeButton("Cancel", dialogClickListeners).show();
+
+
                 break;
             default:
                 break;
