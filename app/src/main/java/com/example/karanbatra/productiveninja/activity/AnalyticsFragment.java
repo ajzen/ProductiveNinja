@@ -138,7 +138,7 @@ public class AnalyticsFragment extends Fragment implements Animation.AnimationLi
             games_minutes+=list_games.get(i).getMinutes();
             games_seconds+=list_games.get(i).getSeconds();
             if(games_seconds > 59){
-                int factor = comm_seconds/60;
+                int factor = games_seconds/60;
                 games_minutes+=factor;
                 games_seconds=games_seconds-60*factor;
             }
