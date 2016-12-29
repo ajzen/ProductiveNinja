@@ -70,7 +70,7 @@
         <activity
             android:name=".activity.Category"
             android:label="@string/title_activity_category"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.CreateNote"
             android:label="@string/title_activity_create_note"
@@ -84,10 +84,6 @@
             android:label="@string/title_activity_detail"
             android:theme="@style/MyMaterialTheme" />
         <activity
-            android:name=".activity.ExceedingActivity"
-            android:label="@string/title_activity_exceeding"
-            android:theme="@style/MyMaterialTheme.CustomTheme" />
-	    <activity
             android:name=".activity.GamesActivity"
             android:label="@string/title_activity_games"
             android:theme="@style/MyMaterialTheme" />

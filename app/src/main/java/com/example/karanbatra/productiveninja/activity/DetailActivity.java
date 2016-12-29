@@ -35,6 +35,8 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        toolbar.setTitleTextColor(0xFFFFFFFF);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final Intent intent = getIntent();
 
         max_sec = (EditText) findViewById(R.id.maxSeconds);

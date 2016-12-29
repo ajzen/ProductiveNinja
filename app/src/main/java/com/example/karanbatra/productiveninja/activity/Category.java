@@ -8,32 +8,35 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.blunderer.materialdesignlibrary.activities.Activity;
+import com.blunderer.materialdesignlibrary.handlers.ActionBarHandler;
+import com.blunderer.materialdesignlibrary.handlers.ActionBarSearchHandler;
+import com.blunderer.materialdesignlibrary.listeners.OnSearchListener;
+
+import com.blunderer.materialdesignlibrary.views.ToolbarSearch;
 import com.example.karanbatra.productiveninja.R;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-public class Category extends AppCompatActivity {
+public class Category extends Activity {
+    public static final String TAG = "Category";
     ArrayList<CategoryListData> myList = new ArrayList<>();
     Context context = Category.this;
     DBHelper db = new DBHelper(this);
     CategoryBaseAdapter categoryBaseAdapter;
     ArrayList<String> packageNames = new ArrayList<>();
+    ArrayList<String> appNames = new ArrayList<>();
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_category);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         List<PackageInfo> packList = getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packList.size(); i++) {
             PackageInfo packInfo = packList.get(i);
@@ -43,14 +46,14 @@ public class Category extends AppCompatActivity {
                 Drawable icon = packInfo.applicationInfo.loadIcon(getPackageManager());
                 Bitmap bitmap = ((BitmapDrawable) icon).getBitmap();
                 CategoryListData ld = new CategoryListData();
+                appNames.add(appName);
                 ld.setName(appName);
                 ld.setImgBitMap(bitmap);
                 myList.add(ld);
             }
         }
 
-//        Collections.sort(myList, new CustomComparator());
-        ListView listView = (ListView) findViewById(R.id.category_listView);
+        listView = (ListView) findViewById(R.id.category_listView);
         categoryBaseAdapter = new CategoryBaseAdapter(context, myList);
         listView.setAdapter(categoryBaseAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -68,19 +71,34 @@ public class Category extends AppCompatActivity {
             }
         });
     }
+
     @Override
-    public void onBackPressed() {
-        //  super.onBackPressed();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-
-
-    }
-    public class CustomComparator implements Comparator<CategoryListData> {
-        @Override
-        public int compare(CategoryListData o1, CategoryListData o2) {
-            return o1.getName().compareTo(o2.getName());
-        }
+    protected int getContentView() {
+        return R.layout.activity_category;
     }
 
+    @Override
+    protected boolean enableActionBarShadow() {
+        return false;
+    }
+
+    @Override
+    protected ActionBarHandler getActionBarHandler() {
+        return new ActionBarSearchHandler(this, new OnSearchListener() {
+
+            @Override
+            public void onSearched(String text) {
+                ArrayList<CategoryListData> myList2 = new ArrayList<>();
+                for(CategoryListData ld : myList){
+                    if(ld.getName().equals(text)){
+                        myList2.add(ld);
+                    }
+                }
+                categoryBaseAdapter = new CategoryBaseAdapter(context, myList2);
+                listView.setAdapter(categoryBaseAdapter);
+            }
+
+        }).enableAutoCompletion().setAutoCompletionMode(ToolbarSearch.AutoCompletionMode.STARTS_WITH)
+        .setAutoCompletionSuggestions(appNames);
+    }
 }

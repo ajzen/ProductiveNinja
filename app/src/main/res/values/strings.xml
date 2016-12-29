@@ -35,7 +35,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="slide_1_title">Productive Ninja</string>
-    <string name="slide_1_desc">Track Usage and boost your productivity With Productive Ninja. </string>
+    <string name="slide_1_desc">Track Usage and Boost your productivity With Productive Ninja. </string>
 
     <string name="slide_2_title">Let\'s Refocus</string>
     <string name="slide_2_desc">Track your time and stay focused on your goals.</string>
@@ -44,7 +44,7 @@
     <string name="slide_3_desc">Get out of mental distractions with a scratchpad that saves things instantly</string>
 
     <string name="slide_4_title">Know your stats</string>
-    <string name="slide_4_desc">Get to know your app usage on gmail.</string>
+    <string name="slide_4_desc">Get to know your app usage on mail.</string>
 
     <string name="title_activity_social">Social</string>
     <string name="title_activity_media">Media</string>

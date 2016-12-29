@@ -1,6 +1,7 @@
 package com.example.karanbatra.productiveninja.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -18,52 +19,61 @@ import java.util.HashSet;
 import java.util.List;
 
 public class GamesActivity extends AppCompatActivity {
-    ArrayList<ListData> myList = new ArrayList<>();
+    ArrayList<ListData> myList = new ArrayList<ListData>();
     Context context = GamesActivity.this;
-    HashSet<String> present = new HashSet<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_social);
+        setContentView(R.layout.activity_games);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         try{
             DBHelper db = new DBHelper(this);
-            List<Contact> list = db.getCategoryContacts("Games");
-            for(int i = 0;i < list.size(); i++) {
+            List<Contact> list = db.getCategoryContacts("Ganes");
+            HashSet<String> present = new HashSet<>();
+            for(int i = 0;i < list.size(); i++){
                 if (!present.contains(list.get(i).getName())) {
                     ApplicationInfo app = getPackageManager().getApplicationInfo(list.get(i).getName(), 0);
                     Drawable icon = getPackageManager().getApplicationIcon(app);
-                    Bitmap bitmap = ((BitmapDrawable) icon).getBitmap();
+                    Bitmap bitmap = ((BitmapDrawable)icon).getBitmap();
                     String name = getPackageManager().getApplicationLabel(app).toString();
                     ListData ld = new ListData();
                     ld.setName(name);
                     int min = list.get(i).getMinutes();
                     int seconds = list.get(i).getSeconds();
-                    if (min < 10) {
-                        if (seconds < 10) {
-                            ld.setTime("0" + min + " : " + "0" + seconds);
-                        } else {
-                            ld.setTime("0" + min + " : " + seconds);
+                    if(min < 10){
+                        if(seconds < 10){
+                            ld.setTime("0"+min+" : "+"0"+seconds);
+                        }else{
+                            ld.setTime("0"+min+" : "+seconds);
                         }
-                    } else {
-                        if (seconds < 10) {
-                            ld.setTime(min + " : " + "0" + seconds);
-                        } else {
-                            ld.setTime(min + " : " + seconds);
+                    }else{
+                        if(seconds < 10){
+                            ld.setTime(min+" : "+"0"+seconds);
+                        }else{
+                            ld.setTime(min+" : "+seconds);
                         }
                     }
                     ld.setImgBitMap(bitmap);
                     myList.add(ld);
                     present.add(list.get(i).getName());
+                }else{
+
                 }
             }
         }
         catch(PackageManager.NameNotFoundException e){
 
         }
-        ListView listView = (ListView)findViewById(R.id.listView);
+        ListView listView = (ListView)findViewById(R.id.listView2);
         listView.setAdapter(new MyBaseAdapter(context, myList));
     }
+    @Override
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
 
+
+    }
 }

@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             if (mode == AppOpsManager.MODE_ALLOWED) {
                 // showNotification();
                 Notification.Builder builder = new Notification.Builder(MainActivity.this);
-                builder.setContentText("App service is running").setContentTitle(
+                builder.setContentText("Productive Ninja Running.").setContentTitle(
                         MainActivity.this.getString(R.string.app_name));
                 builder.setSmallIcon(R.drawable.ninja);
                 // make the intent object

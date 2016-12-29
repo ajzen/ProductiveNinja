@@ -24,9 +24,13 @@ import com.example.karanbatra.productiveninja.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class AnalyticsFragment extends Fragment implements Animation.AnimationListener  {
     View rootView;
+
     TextView social;
     TextView communication;
     TextView media;
@@ -51,7 +55,6 @@ public class AnalyticsFragment extends Fragment implements Animation.AnimationLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_analytics, container, false);
-
         social = (TextView) rootView.findViewById(R.id.social_textview_value);
         media = (TextView) rootView.findViewById(R.id.media_textview_value);
         communication = (TextView) rootView.findViewById(R.id.communication_textview_value);
@@ -74,6 +77,9 @@ public class AnalyticsFragment extends Fragment implements Animation.AnimationLi
         animFadein.setAnimationListener(this);
         // Inflate the layout for this fragment
         return rootView;
+    }
+
+    private void initialize() {
     }
 
     @Override
