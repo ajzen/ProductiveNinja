@@ -29,7 +29,7 @@ public class GamesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         try{
             DBHelper db = new DBHelper(this);
-            List<Contact> list = db.getCategoryContacts("Ganes");
+            List<Contact> list = db.getCategoryContacts("Games");
             HashSet<String> present = new HashSet<>();
             for(int i = 0;i < list.size(); i++){
                 if (!present.contains(list.get(i).getName())) {
